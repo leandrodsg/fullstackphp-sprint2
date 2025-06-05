@@ -1,0 +1,21 @@
+# Arquivos e pastas de backup temporário
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# Configurações locais e sensíveis
+.env
+
+# Pasta de dependências (caso use Composer ou NPM futuramente)
+vendor/
+node_modules/
+
+# Diretórios temporários de exercícios em sprints
+temp/
+
+# Ignora arquivos ocultos gerados pelo sistema
+.DS_Store
+Thumbs.db
