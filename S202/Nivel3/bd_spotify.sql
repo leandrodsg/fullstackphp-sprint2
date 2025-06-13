@@ -1,10 +1,9 @@
--- bd_spotify.sql 
+-- Database and tables
 
 create database if not exists spotify;
 use spotify;
 
--- tabela de usuarios
--- infos basicas do usuario e se eh gratis ou premium
+-- Users table
 create table usuario (
     id int auto_increment primary key,
     email varchar(100) not null unique,
@@ -17,8 +16,7 @@ create table usuario (
     tipo enum('gratis', 'premium') not null
 );
 
--- tabela de assinaturas premium
--- armazena dados da assinatura ativa de um usuario
+-- Subscriptions table
 create table assinatura (
     id int auto_increment primary key,
     usuario_id int not null,
@@ -29,7 +27,7 @@ create table assinatura (
     foreign key (usuario_id) references usuario(id)
 );
 
--- tabela de cartoes so para quem paga com cartao
+-- Credit cards table
 create table cartao (
     id int auto_increment primary key,
     assinatura_id int not null,
@@ -39,7 +37,7 @@ create table cartao (
     foreign key (assinatura_id) references assinatura(id)
 );
 
--- tabela de paypal se usou paypal
+-- PayPal payments table
 create table paypal (
     id int auto_increment primary key,
     assinatura_id int not null,
@@ -47,8 +45,7 @@ create table paypal (
     foreign key (assinatura_id) references assinatura(id)
 );
 
--- tabela de playlists
--- cada usuario pode criar varias playlists
+-- Playlists table
 create table playlist (
     id int auto_increment primary key,
     usuario_id int,
@@ -60,14 +57,13 @@ create table playlist (
     foreign key (usuario_id) references usuario(id)
 );
 
--- tabela de artistas
+-- Artists table
 create table artista (
     id int auto_increment primary key,
     nome varchar(100) not null
 );
 
--- tabela de albuns
--- cada album pertence a um artista
+-- Albums table
 create table album (
     id int auto_increment primary key,
     titulo varchar(100),
@@ -77,18 +73,16 @@ create table album (
     foreign key (artista_id) references artista(id)
 );
 
--- tabela de musicas
--- cada musica pertence a um album
+-- Songs table
 create table musica (
     id int auto_increment primary key,
     titulo varchar(100),
-    duracao int, -- duracao em segundos
+    duracao int,
     album_id int,
     foreign key (album_id) references album(id)
 );
 
--- tabela para associar musicas com playlists
--- inclui quem adicionou e quando
+-- Songs in playlists
 create table playlist_musica (
     playlist_id int,
     musica_id int,
@@ -99,8 +93,7 @@ create table playlist_musica (
     foreign key (adicionado_por) references usuario(id)
 );
 
--- tabela de seguidores de artistas
--- relacao muitos pra muitos entre usuario e artista
+-- Artists followed by users
 create table usuario_artista (
     usuario_id int,
     artista_id int,
@@ -110,8 +103,7 @@ create table usuario_artista (
     foreign key (artista_id) references artista(id)
 );
 
--- tabela de artistas similares
--- auto relacionamento entre artistas
+-- Similar artists
 create table artista_similar (
     artista_id int,
     similar_id int,
@@ -120,8 +112,7 @@ create table artista_similar (
     foreign key (similar_id) references artista(id)
 );
 
--- tabela de favoritos
--- usuario pode favoritar musicas
+-- Favorite songs
 create table favorito_musica (
     usuario_id int,
     musica_id int,
@@ -131,8 +122,7 @@ create table favorito_musica (
     foreign key (musica_id) references musica(id)
 );
 
--- tabela de favoritos de albuns
--- usuario pode favoritar albuns
+-- Favorite albums
 create table favorito_album (
     usuario_id int,
     album_id int,

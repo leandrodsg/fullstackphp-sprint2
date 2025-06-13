@@ -1,98 +1,77 @@
--- bd "optica"
-create database if not exists optica;
-use optica;
+-- Database: optics
+create database if not exists optics;
+use optics;
 
--- tabela de fornecedores
--- cada fornecedor precisa de identif e endereco completo
-create table fornecedor (
-    id int auto_increment primary key,         -- id fornecedor prim key
-    nome varchar(100) not null,                -- nome fornecedor
-    rua varchar(100),                          -- rua endereco
-    numero varchar(10),                        -- num endereco que pode ter letras
-    andar varchar(10),                         -- andar do prédio precisa ser opcional
-    porta varchar(10),                         -- num apartamento/sala precisa ser opcional
-    cidade varchar(50),                        -- cidade fornecedor
-    codigo_postal varchar(15),                 -- cep
-    pais varchar(50),                          -- pais
-    telefone varchar(20),                      -- num telefone
-    fax varchar(20),                           -- num fax
-    nif varchar(20)                            -- num fiscal tipo cnpj
+-- Table: supplier
+create table supplier (
+    id int auto_increment primary key,
+    name varchar(100) not null,
+    street varchar(100),
+    number varchar(10),
+    floor varchar(10),
+    door varchar(10),
+    city varchar(50),
+    postal_code varchar(15),
+    country varchar(50),
+    phone varchar(20),
+    fax varchar(20),
+    tax_id varchar(20)
 );
 
--- tabela de oculos vendidos
--- cada oculos tem marca graduacao tipo/cor da armacao cor da lente preco e vem de um fornecedor
-create table oculos (
-    id int auto_increment primary key,                		-- id oculos chave prim
-    marca varchar(50) not null,                       		-- nome da marca
-    -- separando grau cada lado pq eh comum ter valores diferentes em cada olho
-    graduacao_esquerda varchar(10),                   		-- grau lado esquerdo
-    graduacao_direita varchar(10),                    		-- grau lado direito
-    tipo_armacao enum('flutuante', 'plastica', 'metalica'), -- tipo da armação
-    cor_armacao varchar(30),                          		-- cor da armação
-    cor_vidro varchar(30),                            		-- cor da lente
-    preco decimal(8,2),                               		-- preco com 2 casas 17.90
-    fornecedor_id int,                                		-- fornecedor que entregou esse oculos
-
-    -- ligacao com a tabela fornecedor
-    foreign key (fornecedor_id) references fornecedor(id)
-        on delete set null                            -- null se apagar fornecedor
-        on update cascade                             -- atualiza aqui se mudar o id do fornecedor
+-- Table: glasses
+create table glasses (
+    id int auto_increment primary key,
+    brand varchar(50) not null,
+    left_lens_power varchar(10),
+    right_lens_power varchar(10),
+    frame_type enum('rimless', 'plastic', 'metal'),
+    frame_color varchar(30),
+    lens_color varchar(30),
+    price decimal(8,2),
+    supplier_id int,
+    foreign key (supplier_id) references supplier(id)
+        on delete set null
+        on update cascade
 );
 
--- tabela de clientes
--- cada cliente tem nome endereco contato data de cadastro
-create table cliente (
-    id int auto_increment primary key,            -- id cliente
-    nome varchar(100) not null,                   -- nome cliente
-    endereco varchar(150),                        -- endereco completo simplificado
-    telefone varchar(20),							
+-- Table: client
+create table client (
+    id int auto_increment primary key,
+    name varchar(100) not null,
+    address varchar(150),
+    phone varchar(20),
     email varchar(100),
-    data_registro date                            -- quando foi cadastrado
+    registration_date date
 );
 
--- tabela de indicacoes cliente com outro cliente que o indicou
-create table indicacoes (
-    cliente_id int,               -- quem foi indicado
-    indicado_por_id int,          -- quem indicou
-
-    -- duas fks apontando pra cliente
-    foreign key (cliente_id) references cliente(id),
-    foreign key (indicado_por_id) references cliente(id)
+-- Table: referrals client who was referred by another client
+create table referrals (
+    client_id int,
+    referred_by_id int,
+    foreign key (client_id) references client(id),
+    foreign key (referred_by_id) references client(id)
 );
 
--- tabela de funcionarios
--- cada venda precisa de um funcionario que realizou a venda
-create table funcionario (
-    id int auto_increment primary key,   -- id funcionario
-    nome varchar(100) not null           -- nome completo
+-- Table: employee
+create table employee (
+    id int auto_increment primary key,
+    name varchar(100) not null
 );
 
--- tabela de vendas
--- armazena cada venda feita na otica com data cliente e funcionario
-create table venda (
-    id int auto_increment primary key,        -- id venda
-    data date,                                -- data venda
-    cliente_id int,                           -- cliente que fez a compra
-    funcionario_id int,                       -- funcionario que vendeu
-
-    foreign key (cliente_id) references cliente(id),
-    foreign key (funcionario_id) references funcionario(id)
+-- Table: sale
+create table sale (
+    id int auto_increment primary key,
+    date date,
+    client_id int,
+    employee_id int,
+    foreign key (client_id) references client(id),
+    foreign key (employee_id) references employee(id)
 );
 
--- tabela que liga venda com oculos vendidos
--- uma venda pode ter varios oculos
-create table venda_oculos (
-    venda_id int,             -- id da venda
-    oculos_id int,            -- id do oculos vendido
-
-    foreign key (venda_id) references venda(id),
-    foreign key (oculos_id) references oculos(id)
+-- Table: sale_glasses
+create table sale_glasses (
+    sale_id int,
+    glasses_id int,
+    foreign key (sale_id) references sale(id),
+    foreign key (glasses_id) references glasses(id)
 );
-
-select * from venda_oculos;
-select * from venda;
-select * from funcionario;
-select * from cliente;
-select * from indicacoes;
-select * from fornecedor;
-select * from oculos;

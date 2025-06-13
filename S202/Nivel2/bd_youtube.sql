@@ -1,126 +1,119 @@
--- bd_youtube.sql 
+-- Database and tables
 
 create database if not exists youtube;
 use youtube;
 
--- tabela de usuarios
--- armazena dados basicos e login dos usuarios
-create table usuario (
+-- Users table
+create table user (
     id int auto_increment primary key,
     email varchar(100) not null unique,
-    senha varchar(100) not null,
-    nome_usuario varchar(50) not null,
-    data_nascimento date,
-    sexo enum('M', 'F', 'Outro'),
-    pais varchar(50),
-    codigo_postal varchar(15)
+    password varchar(100) not null,
+    username varchar(50) not null,
+    birth_date date,
+    gender enum('M', 'F', 'Other'),
+    country varchar(50),
+    postal_code varchar(15)
 );
 
--- tabela de canais
--- cada usuario pode ter um canal proprio
-create table canal (
+-- Channels table
+create table channel (
     id int auto_increment primary key,
-    nome varchar(100),
-    descricao text,
-    data_criacao date,
-    usuario_id int,
-    foreign key (usuario_id) references usuario(id)
+    name varchar(100),
+    description text,
+    creation_date date,
+    user_id int,
+    foreign key (user_id) references user(id)
         on delete cascade
         on update cascade
 );
 
--- tabela de videos
--- videos publicados dentro de um canal
--- inclui estatisticas simples como views e curtidas
+-- Videos table
 create table video (
     id int auto_increment primary key,
-    titulo varchar(200) not null,
-    descricao text,
-    nome_arquivo varchar(100),
-    duracao int,
+    title varchar(200) not null,
+    description text,
+    file_name varchar(100),
+    duration int,
     thumbnail varchar(100),
-    visualizacoes int default 0,
-    curtidas int default 0,
-    descurtidas int default 0,
-    estado enum('publico', 'privado', 'oculto'),
-    canal_id int,
-    data_publicacao datetime,
-    foreign key (canal_id) references canal(id)
+    views int default 0,
+    likes int default 0,
+    dislikes int default 0,
+    status enum('public', 'private', 'unlisted'),
+    channel_id int,
+    publish_date datetime,
+    foreign key (channel_id) references channel(id)
         on delete cascade
         on update cascade
 );
 
--- tabela de tags
--- serve para classificar os videos com palavras-chave
+-- Tags table
 create table tag (
     id int auto_increment primary key,
-    nome varchar(50) not null
+    name varchar(50) not null
 );
 
--- tabela de relacao video-tag
--- uma tag pode ser usada em varios videos e vice-versa
+-- Tags linked to videos
 create table video_tag (
     video_id int,
     tag_id int,
-    marcado_por_id int,
-    data_marcacao datetime,
+    marked_by_user_id int,
+    marked_at datetime,
     foreign key (video_id) references video(id),
     foreign key (tag_id) references tag(id),
-    foreign key (marcado_por_id) references usuario(id)
+    foreign key (marked_by_user_id) references user(id)
 );
 
--- tabela de inscricao
--- usuarios podem seguir canais
-create table inscricao (
-    usuario_id int,
-    canal_id int,
-    data_inscricao datetime,
-    foreign key (usuario_id) references usuario(id),
-    foreign key (canal_id) references canal(id)
+-- Subscriptions table
+create table subscription (
+    user_id int,
+    channel_id int,
+    subscribed_at datetime,
+    foreign key (user_id) references user(id),
+    foreign key (channel_id) references channel(id)
 );
 
--- comentarios feitos em videos
-create table comentario (
+-- Comments table
+create table comment (
     id int auto_increment primary key,
-    texto text not null,
-    data datetime,
-    usuario_id int,
+    text text not null,
+    created_at datetime,
+    user_id int,
     video_id int,
-    foreign key (usuario_id) references usuario(id),
+    foreign key (user_id) references user(id),
     foreign key (video_id) references video(id)
 );
 
--- curtidas e descurtidas em videos
-create table curtida_video (
-    usuario_id int,
+-- Video likes and dislikes
+create table video_like (
+    user_id int,
     video_id int,
-    tipo enum('like', 'dislike'),
-    data datetime,
-    foreign key (usuario_id) references usuario(id),
+    type enum('like', 'dislike'),
+    created_at datetime,
+    foreign key (user_id) references user(id),
     foreign key (video_id) references video(id)
 );
 
--- curtidas e descurtidas em comentarios
-create table curtida_comentario (
-    usuario_id int,
-    comentario_id int,
-    tipo enum('like', 'dislike'),
-    data datetime,
-    foreign key (usuario_id) references usuario(id),
-    foreign key (comentario_id) references comentario(id)
+-- Comment likes and dislikes
+create table comment_like (
+    user_id int,
+    comment_id int,
+    type enum('like', 'dislike'),
+    created_at datetime,
+    foreign key (user_id) references user(id),
+    foreign key (comment_id) references comment(id)
 );
 
--- playlists de videos feitas por usuarios
+-- Playlists table
 create table playlist (
     id int auto_increment primary key,
-    nome varchar(100),
-    publica boolean default true,
-    data_criacao date,
-    usuario_id int,
-    foreign key (usuario_id) references usuario(id)
+    name varchar(100),
+    is_public boolean default true,
+    created_at date,
+    user_id int,
+    foreign key (user_id) references user(id)
 );
 
--- relacao n:n entre playlists e videos
+-- Playlist videos link
 create table playlist_video (
     playlist_id int,
     video_id int,

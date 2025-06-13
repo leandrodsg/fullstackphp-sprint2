@@ -1,85 +1,79 @@
--- bd pizzaria
 create database if not exists pizzaria;
 use pizzaria;
 
--- tabela de clientes
--- cada cliente tem nome, endereco, cep, cidade, estado e telefone
-create table cliente (
-    id int auto_increment primary key,         -- id cliente
-    nome varchar(100) not null,                -- nome
-    sobrenome varchar(100) not null,           -- sobrenome
-    endereco varchar(255) not null,            -- endereco completo
-    cep varchar(10) not null,                  -- cep
-    cidade varchar(100) not null,              -- cidade
-    estado varchar(100) not null,              -- estado (sigla ou nome)
-    telefone varchar(20) not null              -- telefone
+-- Customers table
+create table customer (
+    id int auto_increment primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
+    address varchar(255) not null,
+    zip_code varchar(10) not null,
+    city varchar(100) not null,
+    state varchar(100) not null,
+    phone varchar(20) not null
 );
 
--- tabela de lojas
--- cada loja tem endereco e localizacao
-create table loja (
-    id int auto_increment primary key,         -- id loja
-    endereco varchar(255) not null,            -- endereco completo
-    cep varchar(10) not null,                  -- cep
-    cidade varchar(100) not null,              -- cidade
-    estado varchar(100) not null               -- estado
+-- Stores table
+create table store (
+    id int auto_increment primary key,
+    address varchar(255) not null,
+    zip_code varchar(10) not null,
+    city varchar(100) not null,
+    state varchar(100) not null
 );
 
--- tabela de funcionarios
--- cada funcionario trabalha em uma loja e tem cargo
-create table funcionario (
-    id int auto_increment primary key,         -- id funcionario
-    nome varchar(100) not null,                -- nome
-    sobrenome varchar(100) not null,           -- sobrenome
-    nif varchar(20) not null unique,           -- cpf ou nif
-    telefone varchar(20) not null,             -- telefone
-    cargo enum('cozinheiro','entregador') not null, -- cargo
-    loja_id int not null,                      -- loja onde trabalha
-    foreign key (loja_id) references loja(id)  -- fk loja
+-- Employees table
+create table employee (
+    id int auto_increment primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
+    nif varchar(20) not null unique,
+    phone varchar(20) not null,
+    role enum('cook','delivery') not null,
+    store_id int not null,
+    foreign key (store_id) references store(id)
 );
 
--- tabela de categorias de pizza
-create table categoria (
-    id int auto_increment primary key,         -- id categoria
-    nome varchar(100) not null                 -- nome categoria
+-- Pizza categories table
+create table category (
+    id int auto_increment primary key,
+    name varchar(100) not null
 );
 
--- tabela de produtos (pizza, hamburguer, bebida)
-create table produto (
-    id int auto_increment primary key,             -- id produto
-    nome varchar(100) not null,                    -- nome
-    descricao text,                                -- descricao
-    imagem varchar(255),                           -- imagem opcional
-    preco decimal(10,2) not null,                  -- preco
-    tipo enum('pizza','hamburguer','bebida') not null, -- tipo
-    categoria_id int,                              -- so se for pizza
-    foreign key (categoria_id) references categoria(id)
+-- Products table (pizza, burger, drink)
+create table product (
+    id int auto_increment primary key,
+    name varchar(100) not null,
+    description text,
+    image varchar(255),
+    price decimal(10,2) not null,
+    type enum('pizza','burger','drink') not null,
+    category_id int,
+    foreign key (category_id) references category(id)
 );
 
--- tabela de pedidos
--- cada pedido tem cliente, loja, data, tipo de entrega
-create table pedido (
-    id int auto_increment primary key,         -- id pedido
-    cliente_id int not null,                   -- fk cliente
-    loja_id int not null,                      -- fk loja
-    tipo_entrega enum('domicilio','retirada') not null, -- entrega
-    data_hora datetime not null,               -- data do pedido
-    data_entrega datetime,                     -- entrega (so se for domicilio)
-    entregador_id int,                         -- fk funcionario (entregador)
-    preco_total decimal(10,2) not null,        -- preco total
-    foreign key (cliente_id) references cliente(id),
-    foreign key (loja_id) references loja(id),
-    foreign key (entregador_id) references funcionario(id)
+-- Orders table
+create table order_table (
+    id int auto_increment primary key,
+    customer_id int not null,
+    store_id int not null,
+    delivery_type enum('home','pickup') not null,
+    order_datetime datetime not null,
+    delivery_datetime datetime,
+    delivery_person_id int,
+    total_price decimal(10,2) not null,
+    foreign key (customer_id) references customer(id),
+    foreign key (store_id) references store(id),
+    foreign key (delivery_person_id) references employee(id)
 );
 
--- tabela que liga pedido com produtos
--- um pedido pode ter varios produtos
-create table pedido_produto (
-    pedido_id int not null,                -- fk pedido
-    produto_id int not null,              -- fk produto
-    quantidade int not null,              -- qtd comprada
-    preco_unitario decimal(10,2) not null,-- preco na hora
-    primary key (pedido_id, produto_id),
-    foreign key (pedido_id) references pedido(id),
-    foreign key (produto_id) references produto(id)
+-- Order items table
+create table order_product (
+    order_id int not null,
+    product_id int not null,
+    quantity int not null,
+    unit_price decimal(10,2) not null,
+    primary key (order_id, product_id),
+    foreign key (order_id) references order_table(id),
+    foreign key (product_id) references product(id)
 );
