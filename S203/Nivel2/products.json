@@ -1,0 +1,27 @@
+[
+  {
+    "_id": { "$oid": "68514ef771e81550b650eb79" },
+    "type": "pizza",
+    "name": "pepperoni pizza",
+    "description": "tomato sauce pepperoni cheese",
+    "image": "pepperoni_pizza.jpg",
+    "price": 35,
+    "category": "summer"
+  },
+  {
+    "_id": { "$oid": "68514ef771e81550b650eb7a" },
+    "type": "burger",
+    "name": "bacon burger",
+    "description": "artisan burger with bacon",
+    "image": "bacon_burger.jpg",
+    "price": 28
+  },
+  {
+    "_id": { "$oid": "68514ef771e81550b650eb7b" },
+    "type": "drink",
+    "name": "coke can",
+    "description": "soft drink 350ml",
+    "image": "coke_can.jpg",
+    "price": 5
+  }
+]

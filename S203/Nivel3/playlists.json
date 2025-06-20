@@ -1,0 +1,23 @@
+[
+  {
+    "_id": {
+      "$oid": "665fplaylist000000000001"
+    },
+    "name": "Weekly Favorites",
+    "created_by": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
+    },
+    "created_at": {
+      "$date": "2025-06-13T09:00:00Z"
+    },
+    "visibility": "private",
+    "videos": [
+      {
+        "$oid": "665f1a1a1a1a1a1a1a1a1c11"
+      },
+      {
+        "$oid": "665f1a1a1a1a1a1a1a1a1c12"
+      }
+    ]
+  }
+]

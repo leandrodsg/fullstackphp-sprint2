@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Googles Associated SL",
+        "address": {
+            "street": "Lens Street",
+            "number": "123",
+            "city": "Barcelona",
+            "country": "Spain"
+        },
+        "phone": "9999-9999",
+        "fax": "8888-8888",
+        "nif": "A12345678"
+    }
+]

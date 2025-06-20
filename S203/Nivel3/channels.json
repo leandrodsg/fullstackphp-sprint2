@@ -1,0 +1,28 @@
+[
+  {
+    "_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1b11"
+    },
+    "name": "Emma's Kitchen",
+    "description": "Easy home recipes and tips",
+    "created_by": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
+    },
+    "created_at": {
+      "$date": "2025-06-01T10:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1b12"
+    },
+    "name": "Code with Liam",
+    "description": "Coding tutorials and tech talks",
+    "created_by": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
+    },
+    "created_at": {
+      "$date": "2025-06-01T11:00:00Z"
+    }
+  }
+]

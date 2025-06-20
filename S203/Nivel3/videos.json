@@ -1,0 +1,58 @@
+[
+  {
+    "_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1c11"
+    },
+    "title": "How to Make Pancakes",
+    "description": "Simple pancake recipe with 5 ingredients",
+    "url": "https://youtube.com/v/pancake101",
+    "thumbnail": "https://img.youtube.com/vi/pancake101.jpg",
+    "resolution": "1080p",
+    "duration_seconds": 420,
+    "size_mb": 30.5,
+    "file_name": "pancake101.mp4",
+    "views": 230,
+    "likes": 18,
+    "dislikes": 2,
+    "visibility": "public",
+    "tags": [
+      "cooking",
+      "breakfast",
+      "pancake"
+    ],
+    "channel_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1b11"
+    },
+    "uploaded_at": {
+      "$date": "2025-06-10T12:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1c12"
+    },
+    "title": "Intro to JavaScript",
+    "description": "Learn JavaScript basics in 10 minutes",
+    "url": "https://youtube.com/v/jsintro",
+    "thumbnail": "https://img.youtube.com/vi/jsintro.jpg",
+    "resolution": "720p",
+    "duration_seconds": 600,
+    "size_mb": 50.0,
+    "file_name": "jsintro.mp4",
+    "views": 310,
+    "likes": 25,
+    "dislikes": 1,
+    "visibility": "public",
+    "tags": [
+      "coding",
+      "javascript",
+      "tutorial"
+    ],
+    "channel_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1b12"
+    },
+    "uploaded_at": {
+      "$date": "2025-06-10T13:00:00Z"
+    }
+  }
+]

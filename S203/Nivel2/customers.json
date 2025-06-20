@@ -1,0 +1,22 @@
+[
+  {
+    "_id": { "$oid": "68514ec571e81550b650eb77" },
+    "first_name": "john",
+    "last_name": "smith",
+    "address": "123 flower street",
+    "zip": "12345-678",
+    "city": "sao paulo",
+    "state": "sp",
+    "phone": "(11) 91234-5678"
+  },
+  {
+    "_id": { "$oid": "68514ec571e81550b650eb78" },
+    "first_name": "mary",
+    "last_name": "souza",
+    "address": "456 central avenue",
+    "zip": "23456-789",
+    "city": "rio de janeiro",
+    "state": "rj",
+    "phone": "(21) 99876-5432"
+  }
+]

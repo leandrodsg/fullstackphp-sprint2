@@ -1,0 +1,25 @@
+[
+  {
+    "_id": { "$oid": "68514f3071e81550b650eb7c" },
+    "customer_id": { "$oid": "68514ec571e81550b650eb77" },
+    "store_id": { "$oid": "68514cfa71e81550b650eb75" },
+    "order_date": { "$date": "2025-06-10T19:30:00Z" },
+    "delivery_type": "delivery",
+    "products": [
+      {
+        "product_id": { "$oid": "68514ef771e81550b650eb79" },
+        "quantity": 1,
+        "unit_price": 35
+      },
+      {
+        "product_id": { "$oid": "68514ef771e81550b650eb7b" },
+        "quantity": 2,
+        "unit_price": 5
+      }
+    ],
+    "total_price": 45,
+    "notes": "no onions",
+    "delivery_person_id": { "$oid": "68514cc071e81550b650eb74" },
+    "delivery_date": { "$date": "2025-06-10T20:00:00Z" }
+  }
+]

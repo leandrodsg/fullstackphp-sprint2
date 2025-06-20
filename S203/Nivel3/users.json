@@ -1,0 +1,32 @@
+[
+  {
+    "_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
+    },
+    "email": "emma@example.com",
+    "username": "emmatube",
+    "password": "pass123",
+    "full_name": "Emma Johnson",
+    "birth_date": {
+      "$date": "1995-04-12T00:00:00Z"
+    },
+    "gender": "F",
+    "country": "usa",
+    "zip": "90210"
+  },
+  {
+    "_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
+    },
+    "email": "liam@example.com",
+    "username": "liamcoder",
+    "password": "code456",
+    "full_name": "Liam Smith",
+    "birth_date": {
+      "$date": "1992-08-25T00:00:00Z"
+    },
+    "gender": "M",
+    "country": "canada",
+    "zip": "A1A1A1"
+  }
+]

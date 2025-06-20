@@ -1,0 +1,16 @@
+[
+    {
+        "brand": "Rayban",
+        "prescription": {
+            "left_eye": 2.0,
+            "right_eye": 2.3
+        },
+        "frame_type": "Metallic",
+        "frame_color": "Black",
+        "lens_color": "Green",
+        "price": 127.0,
+        "supplier_id": {
+            "$oid": "68512e3571e81550b650eb68"
+        }
+    }
+]

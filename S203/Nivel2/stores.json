@@ -1,0 +1,16 @@
+[
+  {
+    "_id": { "$oid": "68514cfa71e81550b650eb75" },
+    "address": "789 palm street",
+    "zip": "54321-000",
+    "city": "curitiba",
+    "state": "pr"
+  },
+  {
+    "_id": { "$oid": "68514cfa71e81550b650eb76" },
+    "address": "321 brasil avenue",
+    "zip": "11223-445",
+    "city": "porto alegre",
+    "state": "rs"
+  }
+]

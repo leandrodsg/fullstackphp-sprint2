@@ -1,0 +1,38 @@
+[
+    {
+        "client_id": {
+            "$oid": "685135b071e81550b650eb6d"
+        },
+        "glasses_id": {
+            "$oid": "6851358c71e81550b650eb6c"
+        },
+        "employee": "Carlos Ramos",
+        "sale_datetime": {
+            "$date": "2025-02-01T10:00:00Z"
+        }
+    },
+    {
+        "client_id": {
+            "$oid": "685135b071e81550b650eb6e"
+        },
+        "glasses_id": {
+            "$oid": "6851358c71e81550b650eb6c"
+        },
+        "employee": "Ana Ruiz",
+        "sale_datetime": {
+            "$date": "2025-02-02T11:30:00Z"
+        }
+    },
+    {
+        "client_id": {
+            "$oid": "685135b071e81550b650eb6f"
+        },
+        "glasses_id": {
+            "$oid": "6851358c71e81550b650eb6c"
+        },
+        "employee": "Carlos Ramos",
+        "sale_datetime": {
+            "$date": "2025-02-03T14:15:00Z"
+        }
+    }
+]

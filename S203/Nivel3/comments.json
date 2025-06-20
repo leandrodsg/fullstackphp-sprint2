@@ -1,0 +1,32 @@
+[
+  {
+    "_id": {
+      "$oid": "665fcomment00000000000001"
+    },
+    "text": "Great video! I tried the recipe and loved it.",
+    "video_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1c11"
+    },
+    "author_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
+    },
+    "date": {
+      "$date": "2025-06-11T14:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "665fcomment00000000000002"
+    },
+    "text": "Very helpful explanation, thanks!",
+    "video_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1c12"
+    },
+    "author_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
+    },
+    "date": {
+      "$date": "2025-06-11T14:30:00Z"
+    }
+  }
+]

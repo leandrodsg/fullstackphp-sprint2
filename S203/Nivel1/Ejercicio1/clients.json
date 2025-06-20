@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Maria Silva",
+        "address": {
+            "street": "Right Street",
+            "number": "123",
+            "postal_code": "08001"
+        },
+        "phone": "678912345",
+        "email": "email@email.com",
+        "registration_date": {
+            "$date": "2023-04-23T00:00:00Z"
+        },
+        "referred_by": "João Almeida"
+    }
+]

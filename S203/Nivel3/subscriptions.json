@@ -1,0 +1,30 @@
+[
+  {
+    "_id": {
+      "$oid": "665fsubscr00000000000001"
+    },
+    "user_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
+    },
+    "channel_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1b12"
+    },
+    "subscribed_at": {
+      "$date": "2025-06-12T10:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "665fsubscr00000000000002"
+    },
+    "user_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
+    },
+    "channel_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1b11"
+    },
+    "subscribed_at": {
+      "$date": "2025-06-12T10:05:00Z"
+    }
+  }
+]

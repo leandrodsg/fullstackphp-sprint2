@@ -1,0 +1,32 @@
+[
+  {
+    "_id": {
+      "$oid": "665freaction000000000001"
+    },
+    "user_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
+    },
+    "video_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1c12"
+    },
+    "type": "like",
+    "reacted_at": {
+      "$date": "2025-06-12T11:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "665freaction000000000002"
+    },
+    "user_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
+    },
+    "video_id": {
+      "$oid": "665f1a1a1a1a1a1a1a1a1c11"
+    },
+    "type": "like",
+    "reacted_at": {
+      "$date": "2025-06-12T11:05:00Z"
+    }
+  }
+]

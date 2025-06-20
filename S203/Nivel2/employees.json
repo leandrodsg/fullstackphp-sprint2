@@ -1,0 +1,20 @@
+[
+  {
+    "_id": { "$oid": "68514cc071e81550b650eb73" },
+    "first_name": "ana",
+    "last_name": "oliveira",
+    "cpf": "12345678900",
+    "phone": "(41) 99888-7766",
+    "role": "cook",
+    "store_id": { "$oid": "68514cfa71e81550b650eb75" }
+  },
+  {
+    "_id": { "$oid": "68514cc071e81550b650eb74" },
+    "first_name": "carlos",
+    "last_name": "dias",
+    "cpf": "98765432100",
+    "phone": "(41) 91234-5678",
+    "role": "delivery",
+    "store_id": { "$oid": "68514cfa71e81550b650eb76" }
+  }
+]
