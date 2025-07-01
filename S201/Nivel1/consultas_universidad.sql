@@ -138,18 +138,13 @@ where a.id is null;
 
 
 
-
-
-
 -- 1. return the total number of students.
-
 select count(*) as total_students
 from persona
 where tipo = 'alumno';
 
 
 -- 2. count how many students were born in 1999.
-
 select count(*) as students_born_1999
 from persona
 where tipo = 'alumno'
@@ -160,7 +155,6 @@ where tipo = 'alumno'
 -- show two columns: department name and number of professors.
 -- include only departments that have professors.
 -- order by number of professors descending.
-
 select d.nombre as department_name,
        count(prof.id_profesor) as total_professors
 from departamento d
@@ -171,7 +165,6 @@ order by total_professors desc;
 
 -- 4. return a list with all departments and the number of professors in each.
 -- include departments with zero professors.
-
 select d.nombre as department_name,
        count(prof.id_profesor) as total_professors
 from departamento d
@@ -183,7 +176,6 @@ order by total_professors desc;
 -- 5. return a list with the name of all degrees and the number of subjects each has.
 -- include degrees with zero subjects.
 -- order by number of subjects descending.
-
 select g.nombre as degree_name,
        count(a.id) as total_subjects
 from grado g
@@ -194,7 +186,6 @@ order by total_subjects desc;
 
 -- 6. return a list with the name of all degrees and the number of subjects each has,
 -- but only degrees with more than 40 subjects.
-
 select g.nombre as degree_name,
        count(a.id) as total_subjects
 from grado g
@@ -206,7 +197,6 @@ order by total_subjects desc;
 
 -- 7. return a list showing the degree name, type of subject and total credits per type.
 -- columns: degree name, subject type, sum of credits.
-
 select g.nombre as degree_name,
        a.tipo as subject_type,
        sum(a.creditos) as total_credits
@@ -217,7 +207,6 @@ group by g.nombre, a.tipo;
 
 -- 8. return a list showing how many students were enrolled in any subject in each school year.
 -- columns: start year and number of enrolled students.
-
 select ce.anyo_inicio as start_year,
        count(distinct ama.id_alumno) as total_students
 from alumno_se_matricula_asignatura ama
@@ -230,7 +219,6 @@ order by ce.anyo_inicio asc;
 -- include professors who teach zero subjects.
 -- columns: id, name, first surname, second surname, number of subjects.
 -- order by number of subjects descending.
-
 select prof.id_profesor,
        p.nombre,
        p.apellido1,
@@ -244,7 +232,6 @@ order by total_subjects desc;
 
 
 -- 10. return all data of the youngest student.
-
 select *
 from persona
 where tipo = 'alumno'
@@ -253,7 +240,6 @@ limit 1;
 
 
 -- 11. return a list of professors who have a department linked but do not teach any subject.
-
 select p.apellido1,
        p.apellido2,
        p.nombre as professor_name,
