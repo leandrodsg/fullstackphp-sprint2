@@ -1,201 +1,201 @@
--- 1. list the name of all products in the table product.
-select name from product;
+-- 1. Llista el nom de tots els productes de la taula producte.
+select nombre from producto;
 
--- 2. list the names and prices of all products in the table product.
-select name, price from product;
+-- 2. Llista el nom i el preu de tots els productes de la taula producte.
+select nombre, precio from producto;
 
--- 3. list all columns of the table product.
-select * from product;
+-- 3. Llista totes les columnes de la taula producte.
+select * from producto;
 
--- 4. list the product names, the price in euros and the price in us dollars (usd).
-select name, price as euros, price * 1.15 as usd from product;
+-- 4. Llista el nom dels productes, el preu en euros i en dòlars americans (USD).
+select nombre, precio as euros, precio * 1.15 as usd from producto;
 
--- 5. list the product names, the price in euros and the price in us dollars. use the following aliases for the columns: product name, euros, us dollars.
-select name as product_name, price as euros, price * 1.15 as us_dollars from product;
+-- 5. Llista el nom dels productes, el preu en euros i en dòlars americans. Utilitza els àlies: product name, euros, us dollars.
+select nombre as nombre_producto, precio as euros, precio * 1.15 as dolares_us from producto;
 
--- 6. list the names and prices of all products in the table product, converting the names to uppercase.
-select upper(name) as name_uppercase, price from product;
+-- 6. Llista el nom i el preu de tots els productes convertint el nom a majúscules.
+select upper(nombre) as nombre_mayusculas, precio from producto;
 
--- 7. list the names and prices of all products in the table product, converting the names to lowercase.
-select lower(name) as name_lowercase, price from product;
+-- 7. Llista el nom i el preu de tots els productes convertint el nom a minúscules.
+select lower(nombre) as nombre_minusculas, precio from producto;
 
--- 8. list the name of all manufacturers in one column, and in another column show in uppercase the first two characters of the manufacturer name.
-select name, upper(left(name, 2)) as first_two_uppercase from manufacturer;
+-- 8. Llista el nom de tots els fabricants i en una altra columna mostra en majúscules els dos primers caràcters del nom del fabricant.
+select nombre, upper(left(nombre, 2)) as dos_primeres_mayuscules from fabricante;
 
--- 9. list the names and prices of all products in the table product, rounding the price.
-select name, round(price) as price_rounded from product;
+-- 9. Llista el nom i el preu de tots els productes arrodonint el preu.
+select nombre, round(precio) as precio_redondeado from producto;
 
--- 10. list the names and prices of all products in the table product, truncating the price to show it without decimals.
-select name, truncate(price, 0) as price_truncated from product;
+-- 10. Llista el nom i el preu de tots els productes truncant el preu per mostrar-lo sense decimals.
+select nombre, truncate(precio, 0) as precio_truncado from producto;
 
--- 11. list the codes of manufacturers that have products in the table product.
-select distinct manufacturer_code from product;
+-- 11. Llista els codis dels fabricants que tenen productes a la taula producte.
+select distinct codigo_fabricante from producto;
 
--- 12. list the codes of manufacturers that have products in the table product, removing duplicate codes.
-select distinct manufacturer_code from product;
+-- 12. Llista els codis dels fabricants que tenen productes a la taula producte, eliminant codis duplicats.
+select distinct codigo_fabricante from producto;
 
--- 13. list the names of manufacturers in ascending order.
-select name from manufacturer order by name asc;
+-- 13. Llista el nom dels fabricants en ordre ascendent.
+select nombre from fabricante order by nombre asc;
 
--- 14. list the names of manufacturers in descending order.
-select name from manufacturer order by name desc;
+-- 14. Llista el nom dels fabricants en ordre descendent.
+select nombre from fabricante order by nombre desc;
 
--- 15. list the product names ordered first by name ascending and second by price descending.
-select name, price from product order by name asc, price desc;
+-- 15. Llista el nom dels productes ordenats per nom ascendent i preu descendent.
+select nombre, precio from producto order by nombre asc, precio desc;
 
--- 16. return a list with the first 5 rows of the table manufacturer.
-select * from manufacturer limit 5;
+-- 16. Retorna una llista amb les 5 primeres files de la taula fabricant.
+select * from fabricante limit 5;
 
--- 17. return a list with 2 rows starting from the fourth row of the table manufacturer. the fourth row must also be included in the result.
-select * from manufacturer limit 2 offset 3;
+-- 17. Retorna una llista amb 2 files començant des de la quarta fila de la taula fabricant.
+select * from fabricante limit 2 offset 3;
 
--- 18. list the name and price of the cheapest product. (use only order by and limit clauses).
-select name, price from product order by price asc limit 1;
+-- 18. Llista el nom i el preu del producte més barat. (Només order by i limit)
+select nombre, precio from producto order by precio asc limit 1;
 
--- 19. list the name and price of the most expensive product. (use only order by and limit clauses).
-select name, price from product order by price desc limit 1;
+-- 19. Llista el nom i el preu del producte més car. (Només order by i limit)
+select nombre, precio from producto order by precio desc limit 1;
 
--- 20. list the name of all products from the manufacturer whose code is 2.
-select name from product where manufacturer_code = 2;
+-- 20. Llista el nom de tots els productes del fabricant amb codi 2.
+select nombre from producto where codigo_fabricante = 2;
 
--- 21. return a list with the product name, price and manufacturer name of all products in the database.
-select p.name as product_name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code;
+-- 21. Retorna una llista amb el nom, preu i nom del fabricant de tots els productes.
+select p.nombre as nombre_producto, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo;
 
--- 22. return a list with the product name, price and manufacturer name of all products in the database. order the result by manufacturer name alphabetically.
-select p.name as product_name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-order by m.name asc;
+-- 22. Retorna una llista amb el nom, preu i nom del fabricant de tots els productes ordenada pel nom del fabricant.
+select p.nombre as nombre_producto, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+order by f.nombre asc;
 
--- 23. return a list with the product code, product name, manufacturer code and manufacturer name of all products in the database.
-select p.code as product_code, p.name as product_name, p.manufacturer_code, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code;
+-- 23. Retorna una llista amb el codi i nom del producte, codi i nom del fabricant de tots els productes.
+select p.codigo as codigo_producto, p.nombre as nombre_producto, p.codigo_fabricante, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo;
 
--- 24. return the product name, its price and its manufacturer name of the cheapest product.
-select p.name as product_name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-order by p.price asc limit 1;
+-- 24. Retorna el nom, preu i fabricant del producte més barat.
+select p.nombre as nombre_producto, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+order by p.precio asc limit 1;
 
--- 25. return the product name, its price and its manufacturer name of the most expensive product.
-select p.name as product_name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-order by p.price desc limit 1;
+-- 25. Retorna el nom, preu i fabricant del producte més car.
+select p.nombre as nombre_producto, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+order by p.precio desc limit 1;
 
--- 26. return a list of all products from the manufacturer lenovo.
-select p.name, p.price
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where m.name = 'lenovo';
+-- 26. Retorna una llista de tots els productes del fabricant lenovo.
+select p.nombre, p.precio
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where f.nombre = 'Lenovo';
 
--- 27. return a list of all products from the manufacturer crucial with a price greater than 200 €.
-select p.name, p.price
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where m.name = 'crucial' and p.price > 200;
+-- 27. Retorna una llista de tots els productes del fabricant crucial amb preu superior a 200 €.
+select p.nombre, p.precio
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where f.nombre = 'Crucial' and p.precio > 200;
 
--- 28. return a list with all products from the manufacturers asus, hewlett-packard and seagate. without using the in operator.
-select p.name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where m.name = 'asus' or m.name = 'hewlett-packard' or m.name = 'seagate';
+-- 28. Retorna una llista amb tots els productes dels fabricants asus, hewlett-packard i seagate sense utilitzar in.
+select p.nombre, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where f.nombre = 'Asus' or f.nombre = 'Hewlett-Packard' or f.nombre = 'Seagate';
 
--- 29. return a list with all products from the manufacturers asus, hewlett-packard and seagate. using the in operator.
-select p.name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where m.name in ('asus', 'hewlett-packard', 'seagate');
+-- 29. Retorna una llista amb tots els productes dels fabricants asus, hewlett-packard i seagate utilitzant in.
+select p.nombre, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where f.nombre in ('Asus', 'Hewlett-Packard', 'Seagate');
 
--- 30. return a list with the name and price of all products from manufacturers whose name ends with vowel 'e'.
-select p.name, p.price
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where m.name like '%e';
+-- 30. Retorna una llista amb el nom i preu de tots els productes dels fabricants que acaben en vocal 'e'.
+select p.nombre, p.precio
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where f.nombre like '%e';
 
--- 31. return a list with the name and price of all products from manufacturers whose name contains the character 'w'.
-select p.name, p.price
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where m.name like '%w%';
+-- 31. Retorna una llista amb el nom i preu de tots els productes dels fabricants que contenen la lletra 'w'.
+select p.nombre, p.precio
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where f.nombre like '%w%';
 
--- 32. return a list with the product name, price and manufacturer name of all products with price greater than or equal to 180 €. order the result first by price (descending) and then by name (ascending).
-select p.name, p.price, m.name as manufacturer_name
-from product p
-join manufacturer m on p.manufacturer_code = m.code
-where p.price >= 180
-order by p.price desc, p.name asc;
+-- 32. Retorna una llista amb el nom, preu i fabricant de tots els productes amb preu ≥ 180 € ordenats per preu descendent i nom ascendent.
+select p.nombre, p.precio, f.nombre as nombre_fabricante
+from producto p
+join fabricante f on p.codigo_fabricante = f.codigo
+where p.precio >= 180
+order by p.precio desc, p.nombre asc;
 
--- 33. return a list with the code and name of the manufacturer, only of those manufacturers who have products associated in the database.
-select distinct m.code, m.name
-from manufacturer m
-join product p on m.code = p.manufacturer_code;
+-- 33. Retorna una llista amb el codi i nom del fabricant només dels que tenen productes.
+select distinct f.codigo, f.nombre
+from fabricante f
+join producto p on f.codigo = p.codigo_fabricante;
 
--- 34. return a list of all manufacturers that exist in the database, together with the products each one has. the list must also show those manufacturers with no associated products.
-select m.name as manufacturer_name, p.name as product_name
-from manufacturer m
-left join product p on m.code = p.manufacturer_code;
+-- 34. Retorna una llista amb tots els fabricants i els productes que tenen (inclou els que no tenen cap producte).
+select f.nombre as nombre_fabricante, p.nombre as nombre_producto
+from fabricante f
+left join producto p on f.codigo = p.codigo_fabricante;
 
--- 35. return a list showing only those manufacturers who have no associated products.
-select m.name
-from manufacturer m
-left join product p on m.code = p.manufacturer_code
-where p.code is null;
+-- 35. Retorna una llista només amb els fabricants que no tenen productes.
+select f.nombre
+from fabricante f
+left join producto p on f.codigo = p.codigo_fabricante
+where p.codigo is null;
 
--- 36. return all products from the manufacturer lenovo. (without using inner join).
-select name, price
-from product
-where manufacturer_code = (
-  select code from manufacturer where name = 'lenovo'
+-- 36. Retorna tots els productes del fabricant lenovo (sense inner join).
+select nombre, precio
+from producto
+where codigo_fabricante = (
+  select codigo from fabricante where nombre = 'Lenovo'
 );
 
--- 37. return all data of products with the same price as the most expensive product from lenovo. (without using inner join).
+-- 37. Retorna totes les dades dels productes amb el mateix preu que el producte més car de lenovo (sense inner join).
 select *
-from product
-where price = (
-  select max(price) from product
-  where manufacturer_code = (
-    select code from manufacturer where name = 'lenovo'
+from producto
+where precio = (
+  select max(precio) from producto
+  where codigo_fabricante = (
+    select codigo from fabricante where nombre = 'Lenovo'
   )
 );
 
--- 38. list the name of the most expensive product from lenovo.
-select name
-from product
-where manufacturer_code = (
-  select code from manufacturer where name = 'lenovo'
+-- 38. Llista el nom del producte més car de lenovo.
+select nombre
+from producto
+where codigo_fabricante = (
+  select codigo from fabricante where nombre = 'Lenovo'
 )
-order by price desc limit 1;
+order by precio desc limit 1;
 
--- 39. list the name of the cheapest product from hewlett-packard.
-select name
-from product
-where manufacturer_code = (
-  select code from manufacturer where name = 'hewlett-packard'
+-- 39. Llista el nom del producte més barat de hewlett-packard.
+select nombre
+from producto
+where codigo_fabricante = (
+  select codigo from fabricante where nombre = 'Hewlett-Packard'
 )
-order by price asc limit 1;
+order by precio asc limit 1;
 
--- 40. return all products in the database with price greater than or equal to the most expensive product from lenovo.
+-- 40. Retorna tots els productes amb preu ≥ al producte més car de lenovo.
 select *
-from product
-where price >= (
-  select max(price) from product
-  where manufacturer_code = (
-    select code from manufacturer where name = 'lenovo'
+from producto
+where precio >= (
+  select max(precio) from producto
+  where codigo_fabricante = (
+    select codigo from fabricante where nombre = 'Lenovo'
   )
 );
 
--- 41. list all products from the manufacturer asus with price higher than the average price of all its products.
+-- 41. Llista tots els productes de asus amb preu superior a la mitjana dels seus productes.
 select *
-from product
-where manufacturer_code = (
-  select code from manufacturer where name = 'asus'
-) and price > (
-  select avg(price) from product
-  where manufacturer_code = (
-    select code from manufacturer where name = 'asus'
+from producto
+where codigo_fabricante = (
+  select codigo from fabricante where nombre = 'Asus'
+) and precio > (
+  select avg(precio) from producto
+  where codigo_fabricante = (
+    select codigo from fabricante where nombre = 'Asus'
   )
 );
