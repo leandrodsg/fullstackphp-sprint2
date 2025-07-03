@@ -13,8 +13,6 @@ This repository contains SQL queries for two separate MySQL databases:
 
 ```
 ./
-├── schema_tienda.sql
-├── schema_universidad.sql
 ├── consultas_tienda.sql
 ├── consultas_universidad.sql
 ├── README.md
