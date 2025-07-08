@@ -13,15 +13,11 @@ This repository contains SQL queries for two separate MySQL databases:
 
 ```
 ./
-├── schema_tienda.sql
-├── schema_universidad.sql
 ├── consultas_tienda.sql
 ├── consultas_universidad.sql
 ├── README.md
 ```
 
-- `schema_tienda.sql`: Creates tables `producto` and `fabricante` with real sample data.
-- `schema_universidad.sql`: Creates tables `persona`, `profesor`, `departamento`, `grado`, `asignatura`, `curso_escolar` and `alumno_se_matricula_asignatura`.
 - `consultas_tienda.sql`: Contains queries to explore products (`producto`) and manufacturers (`fabricante`).
 - `consultas_universidad.sql`: Contains queries to analyze students (`persona`), professors (`profesor`), subjects (`asignatura`) and departments (`departamento`).
 
