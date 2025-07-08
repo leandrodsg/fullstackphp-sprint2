@@ -15,13 +15,25 @@ This repository contains the implementation of the Level 1 exercise for the Opti
 
 ## File Structure
 
-./
-├── DER_Optica.mwb
-├── DER_Optica.png
-├── bd_optica.sql
-├── dados_optica.sql
-├── consultas_optica.sql
-└── README.md
+- `DER_Optica.mwb`  
+  Editable database model file (MySQL Workbench)
+
+- `DER_Optica.png`  
+  Exported image of the relational diagram
+
+- `bd_optica.sql`  
+  Creates the database schema and tables
+
+- `dados_optica.sql`  
+  Inserts example data for testing
+
+- `consultas_optica.sql`  
+  Includes required and extra queries to validate the model
+
+- `README.md`  
+  This file
+
+---
 
 - `DER_Optica.mwb`:
   - Editable database model file (MySQL Workbench).
