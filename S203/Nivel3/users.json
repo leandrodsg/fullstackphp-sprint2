@@ -1,32 +1,36 @@
+
 [
   {
-    "_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
-    },
+    "_id": "user1",
     "email": "emma@example.com",
     "username": "emmatube",
-    "password": "pass123",
+    "password_hash": "hashed_pass_1",
     "full_name": "Emma Johnson",
-    "birth_date": {
-      "$date": "1995-04-12T00:00:00Z"
-    },
+    "birth_date": "1995-04-12T00:00:00Z",
     "gender": "F",
-    "country": "usa",
+    "country": "USA",
     "zip": "90210"
   },
   {
-    "_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
-    },
+    "_id": "user2",
     "email": "liam@example.com",
     "username": "liamcoder",
-    "password": "code456",
+    "password_hash": "hashed_pass_2",
     "full_name": "Liam Smith",
-    "birth_date": {
-      "$date": "1992-08-25T00:00:00Z"
-    },
+    "birth_date": "1992-08-25T00:00:00Z",
     "gender": "M",
-    "country": "canada",
+    "country": "Canada",
     "zip": "A1A1A1"
+  },
+  {
+    "_id": "user3",
+    "email": "olivia@example.com",
+    "username": "oliviatravels",
+    "password_hash": "hashed_pass_3",
+    "full_name": "Olivia Davis",
+    "birth_date": "1998-11-30T00:00:00Z",
+    "gender": "F",
+    "country": "Australia",
+    "zip": "2000"
   }
-]
+] 

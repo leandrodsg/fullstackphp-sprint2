@@ -1,71 +1,48 @@
-# S203 - Food Order System (MongoDB)
+# Food Delivery Service Database
 
-This project implements Sprint S203 focused on modeling an online food order system using MongoDB.  
-The goal is to create a simple and functional database structure to manage customers, products, orders, stores, and employees.
-
-All data was organized to allow understanding and querying:
-- Who are the registered customers
-- What are the available products (pizza, burger, drink)
-- How the orders are composed and who placed them
-- Which store and employee are associated with each order
+This project models the database for an online food delivery service, using JSON files to simulate a NoSQL database collection.
 
 ---
 
-## Modeled Collections
+## Model Overview
 
-- **customers**  
-  Stores customer basic information.  
-  Includes: first_name, last_name, address, zip, city, state, phone
-
-- **products**  
-  Contains the items that can be ordered.  
-  Includes: type, name, description, image, price, and category (only for pizza)
-
-- **stores**  
-  Represents the physical stores handling the orders.  
-  Includes: address, zip, city, state
-
-- **employees**  
-  Stores employee data.  
-  Includes: first_name, last_name, cpf, phone, role, and linked store
-
-- **orders**  
-  Main document linking customer, store, products, and delivery person.  
-  Includes: customer_id, store_id, product list, total_price, delivery_type, notes, delivery_person_id, delivery_date
+The data is organized into five collections:
+- Orders: Records each transaction, referencing the customer (`customer_id`), the store (`store_id`), the products (`products.product_id`), and the delivery person (`delivery_person_id`).
+- Customers: Stores all personal and contact information for each customer.
+- Products: Contains the details for all available products, such as pizzas, burgers, and drinks.
+- Stores: Holds the details of each physical store.
+- Employees: Stores information about employees, who can be cooks or delivery personnel.
 
 ---
 
-## Model Rules
+## The structure
 
-- Each order belongs to a customer and a store
-- An order can have one or more products
-- If the order is for delivery, the delivery person and delivery date are registered
-- An employee can be a cook or a delivery person but works in only one store
-- Products can be pizza, burger, or drink with common fields
-- Pizza category is embedded inside the product document
-
----
-
-## File Structure
-
-- `customers.json`  
-  Contains two customers with address and contact details
-
-- `products.json`  
-  Contains three products with type, description, image, price, and category (if applicable)
-
-- `stores.json`  
-  Contains two stores with location details
-
-- `employees.json`  
-  Contains two employees linked to stores with defined roles
-
-- `orders.json`  
-  Contains one order with two products, linked to the customer, store, and delivery person
+- From an `orders` document:
+  - Display the core order details (order number, date, total price).
+  - Retrieve the customer's full details using `customer_id` from the `customers` collection to show their name and contact number.
+  - For each item in the `products` array:
+    - Retrieve the product details (name, price) from the `products` collection using `product_id`.
+    - Combine it with the `quantity` from the order document.
+  - If it's a delivery, display the `delivery_address` embedded in the order.
+  - Retrieve the delivery person's details from the `employees` collection using `delivery_person_id`.
 
 ---
 
-## Notes
+## Example Query Flows
 
-This project was created as a practical exercise to consolidate the basic concepts of data modeling in MongoDB.  
-All data is fictional, and the focus is on structural coherence and data integrity.
+- To display the confirmed order details:
+  1. Find the order by its `_id` in `orders.json`.
+  2. Get the customer details from `customers.json` using the `customer_id` from the order.
+  3. For each product in the order's `products` array, get the full product details from `products.json` using `product_id`.
+  4. Get the delivery person's name from `employees.json` using `delivery_person_id`.
+  5. Get store details from `stores.json` using `store_id` if needed.
+
+---
+
+## Files
+
+- `orders.json` – Order transactions
+- `customers.json` – Customer data
+- `products.json` – Product data
+- `stores.json` – Store data
+- `employees.json` – Employee data

@@ -1,20 +1,29 @@
 [
   {
-    "_id": { "$oid": "68514cc071e81550b650eb73" },
-    "first_name": "ana",
-    "last_name": "oliveira",
-    "cpf": "12345678900",
-    "phone": "(41) 99888-7766",
-    "role": "cook",
-    "store_id": { "$oid": "68514cfa71e81550b650eb75" }
+    "_id": { "$oid": "665a1b2c3d4e5f6789012601" },
+    "store_id": { "$oid": "665a1b2c3d4e5f6789012399" },
+    "first_name": "Carlos",
+    "last_name": "Ramos",
+    "nif": "12345678A",
+    "phone": "7777-7777",
+    "role": "delivery_person"
   },
   {
-    "_id": { "$oid": "68514cc071e81550b650eb74" },
-    "first_name": "carlos",
-    "last_name": "dias",
-    "cpf": "98765432100",
-    "phone": "(41) 91234-5678",
-    "role": "delivery",
-    "store_id": { "$oid": "68514cfa71e81550b650eb76" }
+    "_id": { "$oid": "665a1b2c3d4e5f6789012602" },
+    "store_id": { "$oid": "665a1b2c3d4e5f6789012399" },
+    "first_name": "Ana",
+    "last_name": "Paula",
+    "nif": "87654321B",
+    "phone": "8888-8888",
+    "role": "cook"
+  },
+  {
+    "_id": { "$oid": "665a1b2c3d4e5f6789012603" },
+    "store_id": { "$oid": "665a1b2c3d4e5f6789012399" },
+    "first_name": "Luís",
+    "last_name": "Fernandes",
+    "nif": "11223344C",
+    "phone": "9999-9999",
+    "role": "cook"
   }
 ]

@@ -1,27 +1,52 @@
 [
   {
-    "_id": { "$oid": "68514ef771e81550b650eb79" },
+    "_id": { "$oid": "665a1b2c3d4e5f6789012345" },
     "type": "pizza",
-    "name": "pepperoni pizza",
-    "description": "tomato sauce pepperoni cheese",
-    "image": "pepperoni_pizza.jpg",
-    "price": 35,
-    "category": "summer"
+    "name": "Pizza Margherita",
+    "description": "Thin dough, tomato sauce, mozzarella",
+    "image": "margherita.jpg",
+    "price": 8,
+    "category": "classic"
   },
   {
-    "_id": { "$oid": "68514ef771e81550b650eb7a" },
+    "_id": { "$oid": "665a1b2c3d4e5f6789012346" },
+    "type": "pizza",
+    "name": "Pizza BBQ",
+    "description": "Normal dough, BBQ sauce, chicken",
+    "image": "bbq.jpg",
+    "price": 12,
+    "category": "special"
+  },
+  {
+    "_id": { "$oid": "665a1b2c3d4e5f6789012347" },
     "type": "burger",
-    "name": "bacon burger",
-    "description": "artisan burger with bacon",
-    "image": "bacon_burger.jpg",
-    "price": 28
+    "name": "Cheese Hamburger",
+    "description": "Beef patty, cheddar, lettuce",
+    "image": "cheeseburger.jpg",
+    "price": 6
   },
   {
-    "_id": { "$oid": "68514ef771e81550b650eb7b" },
+    "_id": { "$oid": "665a1b2c3d4e5f6789012348" },
+    "type": "burger",
+    "name": "Double Hamburger",
+    "description": "Two beef patties, bacon",
+    "image": "doubleburger.jpg",
+    "price": 8
+  },
+  {
+    "_id": { "$oid": "665a1b2c3d4e5f6789012349" },
     "type": "drink",
-    "name": "coke can",
-    "description": "soft drink 350ml",
-    "image": "coke_can.jpg",
-    "price": 5
+    "name": "Water",
+    "description": "500ml bottle",
+    "image": "water.jpg",
+    "price": 2
+  },
+  {
+    "_id": { "$oid": "665a1b2c3d4e5f6789012350" },
+    "type": "drink",
+    "name": "Coke",
+    "description": "350ml can",
+    "image": "coke.jpg",
+    "price": 2.5
   }
 ]

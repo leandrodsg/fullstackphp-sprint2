@@ -1,51 +1,58 @@
+# Optical Store Database – Exercise 1 (MongoDB)
 
-# Optical Store Database in MongoDB
-
-This project implements the data structure of the optical store *Cul d’Ampolla*, using MongoDB as a document-oriented database. The goal is to digitalize the management of clients, sales, glasses, and suppliers.
-
----
-
-## Collections
-
-- suppliers: name, full address, phone, fax, NIF  
-- glasses: brand, left and right prescription, frame type, frame color, lens color, price, supplier  
-- clients: personal information, contact, registration date, referred by  
-- sales: client, glasses, responsible employee, date and time  
+This project models the optical store "Cul d’Ampolla" for Exercise 1.
 
 ---
 
-## Functional Requirements and Relationships Covered
+## Model Overview
 
-- **"L’òptica vol saber quin és el proveïdor de cadascuna de les ulleres..."**  
-  Each glasses document contains the field `supplier_id`, which holds the `ObjectId` of the respective supplier. The `suppliers` collection stores detailed information about suppliers.
-
-- **"De les ulleres vol saber: la marca, la graduació..."**  
-  The `glasses` collection contains all technical attributes of the products, including left and right prescription, frame type and color, lens color, and price.
-
-- **"Dels clients/es vol emmagatzemar..."**  
-  The `clients` collection stores name, address, phone, email, registration date (`ISODate`), and a field indicating who referred the client.
-
-- **"Quan arriba un/a client/a nou, emmagatzemar el/la client/a que li ha recomanat."**  
-  The field `referred_by` is used as free text (person's name). In future implementations, this could be improved by cross-referencing the clients collection itself.
-
-- **"El sistema ha d'indicar qui ha sigut l'empleat..."**  
-  Each document in the `sales` collection records the name of the responsible employee and links client and glasses using `ObjectId`.
-
-- **"Definiu un període de temps de les vendes."**  
-  Each sale has the field `sale_datetime` as `ISODate`, enabling filtering by date or period in the future.
+The data is organized into five collections:
+- Clients: Stores all personal and contact information for each client, including a reference to the client who made the referral, if applicable.
+- Glasses: Stores all technical and commercial details of each glasses model, including brand, prescription for each eye, frame type and color, color of each lens, price, and a reference to the supplier (`supplier_id`).
+- Suppliers: Holds the full details of each supplier, including complete address, phone, fax, and NIF.
+- Sales: Records each transaction, referencing the client (`client_id`), the glasses sold (`glasses_id`), the responsible employee (`employee_id`), and the date and time of the sale.
+- Employees: Stores the identification and contact information of each employee responsible for sales.
 
 ---
 
-## Project File Structure
+## The structure
 
-- `01_suppliers.js`  
-  Creates the `optica` database and inserts a supplier with all required information.
+- From a client document:
+  - Display all personal/contact data and registration info.
+  - Track who referred the client (if any).
+  - Find all sales for this client in the sales collection (where `client_id` matches).
+  - For each sale, retrieve the glasses bought (using `glasses_id`) and display their details.
+  - For each sale, retrieve the employee responsible (using `employee_id`, if needed).
 
-- `02_glasses.js`  
-  Inserts a glasses model (Rayban) with all attributes, referencing an existing supplier.
+- From a glasses document:
+  - Display all its details (brand, prescription, frame type/color, lens colors, price).
+  - Retrieve the supplier's full details via `supplier_id`.
 
-- `03_clients.js`  
-  Registers a client with basic information and referral source.
+- From a supplier document:
+  - Display all supplier details when requested.
 
-- `04_sales.js`  
-  Records a complete sale including client, glasses, employee, and date/time.
+---
+
+## Example Query Flows
+
+- To display the client details and their purchase history:
+  1. Find the client by its `_id` in clients.json.
+  2. Find all sales in sales.json where `client_id` matches.
+  3. For each sale, get the glasses from glasses.json using `glasses_id`.
+  4. For each sale, get the employee from employees.json using `employee_id` (if needed).
+
+- To display a glasses profile:
+  - Retrieve the glasses by `_id` from glasses.json and show all their details.
+
+- To display supplier details:
+  - Retrieve the supplier by `_id` from suppliers.json and show all their details.
+
+---
+
+## Files
+
+- clients.json – Clients data
+- glasses.json – Glasses data
+- suppliers.json – Suppliers data
+- sales.json – Sales transactions
+- employees.json – Employees data

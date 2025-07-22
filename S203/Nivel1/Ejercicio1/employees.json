@@ -1,0 +1,8 @@
+[
+    {
+        "_id": { "$oid": "66512f3571e81550b650eb70" },
+        "name": "Carlos Ramos",
+        "email": "carlos@optic.com",
+        "phone": "7777-7777"
+    }
+] 

@@ -1,22 +1,40 @@
 [
   {
-    "_id": { "$oid": "68514ec571e81550b650eb77" },
-    "first_name": "john",
-    "last_name": "smith",
-    "address": "123 flower street",
-    "zip": "12345-678",
-    "city": "sao paulo",
-    "state": "sp",
-    "phone": "(11) 91234-5678"
+    "_id": { "$oid": "665a1b2c3d4e5f6789012401" },
+    "first_name": "Person",
+    "last_name": "True",
+    "address": "Right Street, 42b, 3º1",
+    "zip": "08001",
+    "city": "Barcelona",
+    "state": "Catalonia",
+    "phone": "62819321",
+    "email": "person@email.com",
+    "registration_date": { "$date": "2025-01-15T00:00:00Z" }
   },
   {
-    "_id": { "$oid": "68514ec571e81550b650eb78" },
-    "first_name": "mary",
-    "last_name": "souza",
-    "address": "456 central avenue",
-    "zip": "23456-789",
-    "city": "rio de janeiro",
-    "state": "rj",
-    "phone": "(21) 99876-5432"
+    "_id": { "$oid": "665a1b2c3d4e5f6789012402" },
+    "first_name": "Maria",
+    "last_name": "Silva",
+    "address": "Left Avenue, 45, 1ºA",
+    "zip": "08002",
+    "city": "Barcelona",
+    "state": "Catalonia",
+    "phone": "679912346",
+    "email": "maria@email.com",
+    "registration_date": { "$date": "2025-01-10T00:00:00Z" },
+    "referred_by": null
+  },
+  {
+    "_id": { "$oid": "665a1b2c3d4e5f6789012403" },
+    "first_name": "João",
+    "last_name": "Almeida",
+    "address": "Central Square, 100, 2ºB",
+    "zip": "08003",
+    "city": "Barcelona",
+    "state": "Catalonia",
+    "phone": "677788899",
+    "email": "joao@email.com",
+    "registration_date": { "$date": "2025-01-05T00:00:00Z" },
+    "referred_by": { "$oid": "665a1b2c3d4e5f6789012402" }
   }
 ]

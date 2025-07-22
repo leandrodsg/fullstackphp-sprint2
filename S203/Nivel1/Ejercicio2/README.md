@@ -1,60 +1,60 @@
 
 # Optical Store Database – Exercise 2 (MongoDB)
 
-This project is a continuation of the previous optical store database (*Cul d’Ampolla*), expanding the data with new records of suppliers, glasses, clients, and sales.
-
-## 🗄️ Collections and Structure
-
-- **suppliers**  
-  Stores supplier details including name, full address, phone, fax, and NIF.
-
-- **glasses**  
-  Stores glasses information including brand, prescription (left and right), frame type and color, lens color, price, and supplier reference (`supplier_id`).
-
-- **clients**  
-  Stores client personal information such as name, address, phone, email, registration date, and referral source (`referred_by`).
-
-- **sales**  
-  Stores the relationship between clients and glasses, including the employee responsible for the sale and the sale date (`sale_datetime`).
+This project models the optical store "Cul d’Ampolla" for Exercise 2.
 
 ---
 
-## 🔗 Relationships
+## Model Overview
 
-- Each **glasses** document contains a `supplier_id` referencing a document from the **suppliers** collection.
-- Each **sales** document references both a **client** (`client_id`) and a **glasses** (`glasses_id`).
-- The `referred_by` field in **clients** is a free-text field indicating who referred the client.
-
----
-
-## 🧠 Functional Scope
-
-- Ability to retrieve the supplier of any glasses.
-- Ability to retrieve all clients who purchased a specific glasses model.
-- Ability to check the employee responsible for each sale.
-- Full traceability of who bought what, when, and from whom.
+The data is organized into five collections:
+- glasses: Stores all technical and commercial details of each glasses model, including brand, prescription for each eye, frame type and color, color of each lens, price, and a reference to the supplier.
+- suppliers: Holds the full details of each supplier, including complete address, phone, fax, and NIF.
+- clients: Stores all personal and contact information for each client, including a reference to the client who made the referral, if applicable.
+- sales: Records each transaction, referencing the client, the glasses sold, the responsible employee, and the date and time of the sale.
+- employees: Stores the identification and contact information of each employee responsible for sales.
 
 ---
 
-## 🗺️ Data Added in Exercise 2
+## The structure
 
-- **Supplier:** Googles Associated SL
-- **Glasses:** Google # with Metallic frame and Transparent lenses
-- **Clients:** Client 1, Client 2, Client 3 (with referral chain)
-- **Sales:** Each client bought the same glasses, sold by employees Carlos Ramos and Ana Ruiz on different dates.
+- From a glasses (óculos) document:
+  - Display all its details (brand, prescription, frame type/color, lens colors, price).
+  - Retrieve the supplier's full details via `supplier_id`.
+  - Find all sales of this glasses model in the `sales` collection (where `glasses_id` matches).
+  - For each sale, retrieve the client who bought it via `client_id` and display their full profile.
+  - For each sale, retrieve the employee responsible via `employee_id` (if needed).
+
+- From a client document:
+  - Display all personal/contact data and registration info.
+  - Track who referred the client (if any).
+
+- From a supplier document:
+  - Display all supplier details when requested (e.g., via the magnifying glass icon in the interface).
 
 ---
 
-## 💾 Files
+## Example Query Flows
 
-- `clients_ex2.json` – Contains new clients' data
-- `suppliers_ex2.json` – Contains new supplier data
-- `glasses_ex2.json` – Contains new glasses model
-- `sales_ex2.json` – Contains sales transactions linking clients and glasses
+- To display the glasses details and who bought them:
+  1. Find the glasses by its `_id` in `glasses.json`.
+  2. Retrieve the supplier using `supplier_id` from `suppliers.json`.
+  3. Find all sales in `sales.json` where `glasses_id` matches.
+  4. For each sale, get the client from `clients.json` using `client_id`.
+  5. For each sale, get the employee from `employees.json` using `employee_id` (if needed).
+
+- To display a client profile when clicking a name:
+  - Retrieve the client by `_id` from `clients.json` and show all their details.
+
+- To display supplier details when clicking the magnifying glass:
+  - Retrieve the supplier by `_id` from `suppliers.json` and show all their details.
 
 ---
 
-## ✅ Notes
+## Files
 
-- This project extends the previous Exercise 1 database without creating a new database, as recommended for real-world systems scalability.
-- Collections, structure, and naming follow best practices for MongoDB and are fully in English as per the feedback received.
+- `glasses.json` – Glasses data
+- `suppliers.json` – Suppliers data
+- `clients.json` – Clients data
+- `sales.json` – Sales transactions
+- `employees.json` – Employees data

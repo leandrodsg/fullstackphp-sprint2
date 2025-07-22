@@ -1,58 +1,32 @@
 [
   {
-    "_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1c11"
-    },
+    "_id": "video1",
     "title": "How to Make Pancakes",
-    "description": "Simple pancake recipe with 5 ingredients",
-    "url": "https://youtube.com/v/pancake101",
-    "thumbnail": "https://img.youtube.com/vi/pancake101.jpg",
-    "resolution": "1080p",
+    "description": "A quick and easy recipe for perfect fluffy pancakes.",
+    "file_name": "pancakes.mp4",
+    "size_mb": 150.5,
+    "thumbnail": "/images/pancakes_thumb.jpg",
     "duration_seconds": 420,
-    "size_mb": 30.5,
-    "file_name": "pancake101.mp4",
-    "views": 230,
-    "likes": 18,
-    "dislikes": 2,
+    "views": 1500,
     "visibility": "public",
-    "tags": [
-      "cooking",
-      "breakfast",
-      "pancake"
-    ],
-    "channel_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1b11"
-    },
-    "uploaded_at": {
-      "$date": "2025-06-10T12:00:00Z"
-    }
+    "tags": ["cooking", "breakfast", "recipe"],
+    "uploaded_by": "user1",
+    "channel_id": "channel1",
+    "uploaded_at": "2025-06-10T12:00:00Z"
   },
   {
-    "_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1c12"
-    },
-    "title": "Intro to JavaScript",
-    "description": "Learn JavaScript basics in 10 minutes",
-    "url": "https://youtube.com/v/jsintro",
-    "thumbnail": "https://img.youtube.com/vi/jsintro.jpg",
-    "resolution": "720p",
-    "duration_seconds": 600,
-    "size_mb": 50.0,
-    "file_name": "jsintro.mp4",
-    "views": 310,
-    "likes": 25,
-    "dislikes": 1,
+    "_id": "video2",
+    "title": "Intro to JavaScript ES6 Features",
+    "description": "A deep dive into arrow functions, let/const, and destructuring.",
+    "file_name": "es6_intro.mp4",
+    "size_mb": 250.0,
+    "thumbnail": "/images/js_thumb.jpg",
+    "duration_seconds": 950,
+    "views": 3200,
     "visibility": "public",
-    "tags": [
-      "coding",
-      "javascript",
-      "tutorial"
-    ],
-    "channel_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1b12"
-    },
-    "uploaded_at": {
-      "$date": "2025-06-10T13:00:00Z"
-    }
+    "tags": ["programming", "javascript", "es6", "webdev"],
+    "uploaded_by": "user2",
+    "channel_id": "channel2",
+    "uploaded_at": "2025-06-12T18:00:00Z"
   }
 ]

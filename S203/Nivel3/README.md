@@ -1,73 +1,56 @@
-# S204 - YouTube Mini System (MongoDB)
 
-This project implements Sprint S204 focused on modeling a mini YouTube-like system using MongoDB.  
-The goal is to create a simple and consistent database structure to manage users, channels, videos, comments, subscriptions, reactions, and playlists.
+# YouTube-Like Platform Database
 
----
-
-## Modeled Collections
-
-- **users**  
-  Stores basic user information.  
-  Includes: email, username, password, full_name, birth_date, gender, country, zip
-
-- **channels**  
-  Represents user-created channels.  
-  Includes: name, description, created_by (user), created_at
-
-- **videos**  
-  Stores video data uploaded to a channel.  
-  Includes: title, description, url, thumbnail, resolution, duration, size, views, likes, dislikes, visibility, tags, channel_id, uploaded_at
-
-- **comments**  
-  Stores user comments on videos.  
-  Includes: text, video_id, author_id, date
-
-- **subscriptions**  
-  Represents subscriptions of users to channels.  
-  Includes: user_id, channel_id, subscribed_at
-
-- **reactions**  
-  Stores user reactions (like/dislike) to videos.  
-  Includes: user_id, video_id, type, reacted_at
-
-- **playlists**  
-  Represents video playlists created by users.  
-  Includes: name, created_by, created_at, visibility, videos (list)
+This project models the database for a simplified video-sharing platform.
 
 ---
 
-## Model Rules
+## Model Overview
 
-- Each channel is owned by one user
-- A channel can have multiple videos
-- Videos are linked to channels (not directly to users)
-- Users can comment on any video
-- Users can subscribe to channels (excluding their own)
-- Reactions are limited to one per user per video
-- Playlists can contain multiple videos and be public or private
+The data is organized into seven collections:
+- Users: Stores all personal and authentication information for each user.
+- Channels: Represents the channels created by users to publish content.
+- Videos: Contains all metadata for the uploaded videos.
+- Subscriptions: Tracks which users are subscribed to which channels.
+- Comments: Stores user comments on videos, including support for nested replies.
+- Reactions: A polymorphic collection to handle likes and dislikes for both videos and comments.
+- Playlists: Allows users to group videos into custom lists.
 
 ---
 
-## File Structure
+## The structure
 
-- `users.json`  
-  Contains two users with basic info
+- From a single `videos` document:
+  - Display the core video details (title, description, tags).
+  - Retrieve channel details from the `channels` collection using `channel_id`.
+  - From the channel, get the author's details from the `users` collection using `created_by`.
+  - Calculate the total number of subscribers for the channel by querying `subscriptions.json`.
+  - Aggregate likes and dislikes for the video by querying `reactions.json` where `content_type` is "video" and `content_id` matches the video's ID.
+  - Retrieve all top-level comments from `comments.json` where `video_id` matches and `parent_comment_id` is `null`.
+  - For each comment, retrieve its replies by querying `comments.json` where the `parent_comment_id` matches the top-level comment's ID.
+  - For each comment (and its replies), aggregate its likes and dislikes from `reactions.json`.
 
-- `channels.json`  
-  Contains two channels, each created by one user
+---
 
-- `videos.json`  
-  Contains two videos, each linked to a channel
+## Example Query Flows
 
-- `comments.json`  
-  Contains two comments, one per video, made by the opposite user
+- To display the full video page with all interactions:
+  1. Find the video by its `_id` in `videos.json`.
+  2. Get the channel details from `channels.json` using the `channel_id` from the video.
+  3. Get the user (author) details from `users.json` using the `created_by` field from the channel.
+  4. Get all comments for the video from `comments.json` using the `video_id`.
+  5. Get all reactions related to the video and its comments from `reactions.json`.
+  6. In the application logic, process the comments to build the nested reply structure.
+  7. Process the reactions to calculate the like/dislike counts for the video and for each individual comment.
 
-- `subscriptions.json`  
-  Contains two subscriptions, users subscribing to each other's channels
+---
 
-- `reactions.json`  
-  Contains two likes, each user liking the other user's video
+## Files
 
-- `playlists.json`  
-  One playlist with both videos included
+- `users.json` – User account data
+- `channels.json` – User channel data
+- `subscriptions.json` – Channel subscription data
+- `videos.json` – Video metadata
+- `comments.json` – Video comments and replies
+- `reactions.json` – Likes and dislikes for videos and comments
+- `playlists.json` – User-created video playlists

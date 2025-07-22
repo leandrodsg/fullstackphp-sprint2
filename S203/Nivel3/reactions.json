@@ -1,32 +1,67 @@
+
 [
   {
-    "_id": {
-      "$oid": "665freaction000000000001"
-    },
-    "user_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1a11"
-    },
-    "video_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1c12"
-    },
-    "type": "like",
-    "reacted_at": {
-      "$date": "2025-06-12T11:00:00Z"
-    }
+    "_id": "reaction1",
+    "user_id": "user2",
+    "content_id": "video1",
+    "content_type": "video",
+    "type": "dislike",
+    "reacted_at": "2025-07-06T14:05:00Z"
   },
   {
-    "_id": {
-      "$oid": "665freaction000000000002"
-    },
-    "user_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1a12"
-    },
-    "video_id": {
-      "$oid": "665f1a1a1a1a1a1a1a1a1c11"
-    },
+    "_id": "reaction2",
+    "user_id": "user3",
+    "content_id": "video1",
+    "content_type": "video",
     "type": "like",
-    "reacted_at": {
-      "$date": "2025-06-12T11:05:00Z"
-    }
+    "reacted_at": "2025-07-06T14:06:00Z"
+  },
+  {
+    "_id": "reaction3",
+    "user_id": "user1",
+    "content_id": "comment1",
+    "content_type": "comment",
+    "type": "like",
+    "reacted_at": "2025-07-06T14:10:00Z"
+  },
+  {
+    "_id": "reaction4",
+    "user_id": "user3",
+    "content_id": "comment1",
+    "content_type": "comment",
+    "type": "dislike",
+    "reacted_at": "2025-07-06T14:12:00Z"
+  },
+  {
+    "_id": "reaction5",
+    "user_id": "user1",
+    "content_id": "comment2",
+    "content_type": "comment",
+    "type": "dislike",
+    "reacted_at": "2025-07-06T16:05:00Z"
+  },
+  {
+    "_id": "reaction6",
+    "user_id": "user2",
+    "content_id": "comment2",
+    "content_type": "comment",
+    "type": "like",
+    "reacted_at": "2025-07-06T16:06:00Z"
+  },
+  {
+    "_id": "reaction7",
+    "user_id": "user1",
+    "content_id": "comment3",
+    "content_type": "comment",
+    "type": "like",
+    "reacted_at": "2025-07-07T10:35:00Z"
+  },
+  {
+    "_id": "reaction8",
+    "user_id": "user2",
+    "content_id": "comment3",
+    "content_type": "comment",
+    "type": "like",
+    "reacted_at": "2025-07-07T10:36:00Z"
   }
-]
+] 

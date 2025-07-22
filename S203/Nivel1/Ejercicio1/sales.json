@@ -1,14 +1,9 @@
 [
     {
-        "client_id": {
-            "$oid": "68512d8271e81550b650eb67"
-        },
-        "glasses_id": {
-            "$oid": "68512e7571e81550b650eb69"
-        },
-        "employee": "Carlos Ramos",
-        "sale_datetime": {
-            "$date": "2025-06-16T14:30:00Z"
-        }
+        "_id": { "$oid": "66512f8571e81550b650eb71" },
+        "client_id": { "$oid": "66512d8271e81550b650eb67" },
+        "glasses_id": { "$oid": "66512e7571e81550b650eb69" },
+        "employee_id": { "$oid": "66512f3571e81550b650eb70" },
+        "sale_datetime": { "$date": "2025-06-16T14:30:00Z" }
     }
 ]

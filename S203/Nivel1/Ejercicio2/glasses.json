@@ -1,0 +1,13 @@
+[
+  {
+    "_id": { "$oid": "665a1b2c3d4e5f6789012345" },
+    "brand": "Google #",
+    "prescription": { "left_eye": 1.5, "right_eye": 1.75 },
+    "frame_type": "Metallic",
+    "frame_color": "Grey",
+    "left_lens_color": "Transparent",
+    "right_lens_color": "Transparent",
+    "price": 105.75,
+    "supplier_id": { "$oid": "665a1b2c3d4e5f6789012399" }
+  }
+] 
