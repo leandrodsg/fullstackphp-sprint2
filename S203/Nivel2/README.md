@@ -7,7 +7,7 @@ This project models the database for an online food delivery service, using JSON
 ## Model Overview
 
 The data is organized into five collections:
-- Orders: Records each transaction, referencing the customer (`customer_id`), the store (`store_id`), the products (`products.product_id`), and the delivery person (`delivery_person_id`).
+- Orders: Records each transaction, containing both the references to other collections (like `customer_id` and `product_id`) and a snapshot of the key information needed for display, such as customer name and product details. This optimizes the data for quick reading of the order confirmation screen.
 - Customers: Stores all personal and contact information for each customer.
 - Products: Contains the details for all available products, such as pizzas, burgers, and drinks.
 - Stores: Holds the details of each physical store.
@@ -15,27 +15,17 @@ The data is organized into five collections:
 
 ---
 
-## The structure
+## How The Model Supports The Interface
+
+The structure is designed to support the "Confirmed Order" screen by providing all necessary data in a single document, minimizing the need for additional queries.
 
 - From an `orders` document:
-  - Display the core order details (order number, date, total price).
-  - Retrieve the customer's full details using `customer_id` from the `customers` collection to show their name and contact number.
-  - For each item in the `products` array:
-    - Retrieve the product details (name, price) from the `products` collection using `product_id`.
-    - Combine it with the `quantity` from the order document.
-  - If it's a delivery, display the `delivery_address` embedded in the order.
-  - Retrieve the delivery person's details from the `employees` collection using `delivery_person_id`.
-
----
-
-## Example Query Flows
-
-- To display the confirmed order details:
-  1. Find the order by its `_id` in `orders.json`.
-  2. Get the customer details from `customers.json` using the `customer_id` from the order.
-  3. For each product in the order's `products` array, get the full product details from `products.json` using `product_id`.
-  4. Get the delivery person's name from `employees.json` using `delivery_person_id`.
-  5. Get store details from `stores.json` using `store_id` if needed.
+  - All data required for the confirmation screen is available directly within the order document.
+  - The `customer_snapshot` object provides the customer's name and contact number.
+  - Each item in the `products` array contains its `name`, `quantity`, and `unit_price` at the time of purchase.
+  - If it's a delivery, the `delivery_address` is embedded in the order.
+  - Core order details (order number, date, total price) are also included.
+  - References like `customer_id` and `product_id` are preserved for data integrity and more complex queries that may be needed elsewhere.
 
 ---
 

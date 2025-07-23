@@ -1,3 +1,4 @@
+
 [
   {
     "_id": "video1",
@@ -7,12 +8,55 @@
     "size_mb": 150.5,
     "thumbnail": "/images/pancakes_thumb.jpg",
     "duration_seconds": 420,
-    "views": 1500,
     "visibility": "public",
     "tags": ["cooking", "breakfast", "recipe"],
-    "uploaded_by": "user1",
-    "channel_id": "channel1",
-    "uploaded_at": "2025-06-10T12:00:00Z"
+    "uploaded_at": "2025-06-10T12:00:00Z",
+    
+    "author_details": {
+      "user_id": "user1",
+      "username": "emmatube",
+      "channel_name": "Emma's Kitchen",
+      "channel_subscriber_count": 1
+    },
+
+    "stats": {
+      "views": 1530,
+      "likes": 1,
+      "dislikes": 1
+    },
+
+    "comments": [
+      {
+        "_id": "comment1",
+        "author_id": "user2",
+        "author_username": "liamcoder",
+        "text": "I don't really like this :(",
+        "created_at": "2025-07-06T14:00:00Z",
+        "likes": 1,
+        "dislikes": 1,
+        "replies": [
+          {
+            "_id": "comment2",
+            "author_id": "user1",
+            "author_username": "emmatube",
+            "text": "No idea, man!",
+            "created_at": "2025-07-06T16:00:00Z",
+            "likes": 1,
+            "dislikes": 1
+          }
+        ]
+      },
+      {
+        "_id": "comment3",
+        "author_id": "user3",
+        "author_username": "oliviatravels",
+        "text": "Hell yeah!",
+        "created_at": "2025-07-07T10:30:00Z",
+        "likes": 2,
+        "dislikes": 0,
+        "replies": []
+      }
+    ]
   },
   {
     "_id": "video2",
@@ -22,11 +66,34 @@
     "size_mb": 250.0,
     "thumbnail": "/images/js_thumb.jpg",
     "duration_seconds": 950,
-    "views": 3200,
     "visibility": "public",
     "tags": ["programming", "javascript", "es6", "webdev"],
-    "uploaded_by": "user2",
-    "channel_id": "channel2",
-    "uploaded_at": "2025-06-12T18:00:00Z"
+    "uploaded_at": "2025-06-12T18:00:00Z",
+
+    "author_details": {
+      "user_id": "user2",
+      "username": "liamcoder",
+      "channel_name": "Code with Liam",
+      "channel_subscriber_count": 0
+    },
+
+    "stats": {
+      "views": 480,
+      "likes": 1,
+      "dislikes": 0
+    },
+
+    "comments": [
+        {
+        "_id": "comment4",
+        "author_id": "user1",
+        "author_username": "emmatube",
+        "text": "Great explanation of arrow functions!",
+        "created_at": "2025-07-08T11:00:00Z",
+        "likes": 1,
+        "dislikes": 0,
+        "replies": []
+      }
+    ]
   }
-]
+] 

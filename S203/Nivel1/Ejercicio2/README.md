@@ -1,60 +1,25 @@
-
 # Optical Store Database – Exercise 2 (MongoDB)
 
-This project models the optical store "Cul d’Ampolla" for Exercise 2.
+This project models the optical store "Cul d’Ampolla" for Exercise 2. The data is structured to efficiently support the main application view: the product (glasses) details page.
 
 ---
 
 ## Model Overview
 
-The data is organized into five collections:
-- glasses: Stores all technical and commercial details of each glasses model, including brand, prescription for each eye, frame type and color, color of each lens, price, and a reference to the supplier.
-- suppliers: Holds the full details of each supplier, including complete address, phone, fax, and NIF.
-- clients: Stores all personal and contact information for each client, including a reference to the client who made the referral, if applicable.
-- sales: Records each transaction, referencing the client, the glasses sold, the responsible employee, and the date and time of the sale.
-- employees: Stores the identification and contact information of each employee responsible for sales.
+To ensure the product page loads quickly and efficiently, the data model includes key related information directly within each glasses document. 
+The collections are organized as follows:
+
+- glasses.json: The primary collection for this exercise. It stores all product details and includes a snapshot of the `supplier` and the complete `purchase_history`. Each entry in the history contains key details of the client and the employee involved.
+- clients.json: Acts as a normalized user catalog, containing the full details for every client.
+- suppliers.json: A catalog containing the full details of each supplier.
+- employees.json: A catalog containing the information of each employee.
 
 ---
 
-## The structure
+## How The Model Supports The Interface
 
-- From a glasses (óculos) document:
-  - Display all its details (brand, prescription, frame type/color, lens colors, price).
-  - Retrieve the supplier's full details via `supplier_id`.
-  - Find all sales of this glasses model in the `sales` collection (where `glasses_id` matches).
-  - For each sale, retrieve the client who bought it via `client_id` and display their full profile.
-  - For each sale, retrieve the employee responsible via `employee_id` (if needed).
+With this design, displaying the product page is highly efficient:
 
-- From a client document:
-  - Display all personal/contact data and registration info.
-  - Track who referred the client (if any).
-
-- From a supplier document:
-  - Display all supplier details when requested (e.g., via the magnifying glass icon in the interface).
-
----
-
-## Example Query Flows
-
-- To display the glasses details and who bought them:
-  1. Find the glasses by its `_id` in `glasses.json`.
-  2. Retrieve the supplier using `supplier_id` from `suppliers.json`.
-  3. Find all sales in `sales.json` where `glasses_id` matches.
-  4. For each sale, get the client from `clients.json` using `client_id`.
-  5. For each sale, get the employee from `employees.json` using `employee_id` (if needed).
-
-- To display a client profile when clicking a name:
-  - Retrieve the client by `_id` from `clients.json` and show all their details.
-
-- To display supplier details when clicking the magnifying glass:
-  - Retrieve the supplier by `_id` from `suppliers.json` and show all their details.
-
----
-
-## Files
-
-- `glasses.json` – Glasses data
-- `suppliers.json` – Suppliers data
-- `clients.json` – Clients data
-- `sales.json` – Sales transactions
-- `employees.json` – Employees data
+1.  A single document is retrieved from the `glasses` collection using the product's `_id`.
+2.  All the necessary data is immediately available within that one document, including the supplier's name and the list of clients who bought the product. This eliminates the need for additional database lookups.
+3.  If a user wants to see a client's full profile, the `_id` stored in the purchase history can be used to query the `clients` collection. 

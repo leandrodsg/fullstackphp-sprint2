@@ -1,36 +1,45 @@
 [
-    {
-        "_id": { "$oid": "66512d8271e81550b650eb67" },
-        "name": "Maria Silva",
-        "address": {
-            "street": "Right Street",
-            "number": "123",
-            "floor": "2",
-            "door": "B",
-            "city": "Barcelona",
-            "postal_code": "08001",
-            "country": "Spain"
-        },
-        "phone": "678912345",
-        "email": "email@email.com",
-        "registration_date": { "$date": "2023-04-23T00:00:00Z" },
-        "referred_by": { "$oid": "66512d8271e81550b650eb68" }
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a50" },
+    "name": "Maria Silva",
+    "address": {
+      "street": "Right Street",
+      "number": "123",
+      "city": "Barcelona",
+      "postal_code": "08001",
+      "country": "Spain"
     },
-    {
-        "_id": { "$oid": "66512d8271e81550b650eb68" },
-        "name": "João Almeida",
-        "address": {
-            "street": "Left Avenue",
-            "number": "45",
-            "floor": "1",
-            "door": "A",
-            "city": "Barcelona",
-            "postal_code": "08002",
-            "country": "Spain"
-        },
-        "phone": "679912346",
-        "email": "joao@email.com",
-        "registration_date": { "$date": "2023-03-15T00:00:00Z" },
-        "referred_by": null
-    }
-]
+    "phone": "678912345",
+    "email": "maria.silva@email.com",
+    "registration_date": { "$date": "2023-04-23T00:00:00Z" },
+    "referred_by": { "$oid": "665b1b3a7f8b9c0d1e2f3a51" },
+    "purchase_history": [
+      {
+        "sale_datetime": { "$date": "2025-06-16T14:30:00Z" },
+        "employee_name": "Carlos Ramos",
+        "glasses": {
+          "brand": "Raybon",
+          "prescription": { "left_eye": 2.3, "right_eye": 2.0 },
+          "frame_type": "Metallic",
+          "price": 127.0
+        }
+      }
+    ]
+  },
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a51" },
+    "name": "João Almeida",
+    "address": {
+      "street": "Left Avenue",
+      "number": "45",
+      "city": "Barcelona",
+      "postal_code": "08002",
+      "country": "Spain"
+    },
+    "phone": "679912346",
+    "email": "joao.almeida@email.com",
+    "registration_date": { "$date": "2023-03-15T00:00:00Z" },
+    "referred_by": null,
+    "purchase_history": []
+  }
+] 

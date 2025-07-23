@@ -1,56 +1,39 @@
 
 # YouTube-Like Platform Database
 
-This project models the database for a simplified video-sharing platform.
+This project models the database for a simplified video-sharing platform, using JSON files to simulate NoSQL database collections.
 
 ---
 
 ## Model Overview
 
-The data is organized into seven collections:
+The data is organized into the following collections:
 - Users: Stores all personal and authentication information for each user.
-- Channels: Represents the channels created by users to publish content.
-- Videos: Contains all metadata for the uploaded videos.
-- Subscriptions: Tracks which users are subscribed to which channels.
-- Comments: Stores user comments on videos, including support for nested replies.
-- Reactions: A polymorphic collection to handle likes and dislikes for both videos and comments.
+- Channels: Represents the channels created by users, including a pre-calculated `subscriber_count`.
+- Videos: The main collection. Contains all video metadata, plus embedded author details, view/reaction stats, and a full, nested comment tree.
+- Subscriptions: A log to record when a user subscribes to a channel.
+- Reactions: A log to track likes and dislikes on videos and comments.
 - Playlists: Allows users to group videos into custom lists.
 
 ---
 
-## The structure
+## How The Model Supports The Interface
 
-- From a single `videos` document:
-  - Display the core video details (title, description, tags).
-  - Retrieve channel details from the `channels` collection using `channel_id`.
-  - From the channel, get the author's details from the `users` collection using `created_by`.
-  - Calculate the total number of subscribers for the channel by querying `subscriptions.json`.
-  - Aggregate likes and dislikes for the video by querying `reactions.json` where `content_type` is "video" and `content_id` matches the video's ID.
-  - Retrieve all top-level comments from `comments.json` where `video_id` matches and `parent_comment_id` is `null`.
-  - For each comment, retrieve its replies by querying `comments.json` where the `parent_comment_id` matches the top-level comment's ID.
-  - For each comment (and its replies), aggregate its likes and dislikes from `reactions.json`.
+The structure is designed to easily support the video page UI.
 
----
-
-## Example Query Flows
-
-- To display the full video page with all interactions:
-  1. Find the video by its `_id` in `videos.json`.
-  2. Get the channel details from `channels.json` using the `channel_id` from the video.
-  3. Get the user (author) details from `users.json` using the `created_by` field from the channel.
-  4. Get all comments for the video from `comments.json` using the `video_id`.
-  5. Get all reactions related to the video and its comments from `reactions.json`.
-  6. In the application logic, process the comments to build the nested reply structure.
-  7. Process the reactions to calculate the like/dislike counts for the video and for each individual comment.
+- From a single `videos` document, the interface has access to:
+  - The core video details (title, description, tags).
+  - The author's username and channel name from the embedded `author_details` object.
+  - The total views, likes, and dislikes from the embedded `stats` object.
+  - The entire comment section, including nested replies, from the embedded `comments` array. Each comment and reply also includes its own like/dislike counts.
 
 ---
 
 ## Files
 
-- `users.json` – User account data
-- `channels.json` – User channel data
-- `subscriptions.json` – Channel subscription data
-- `videos.json` – Video metadata
-- `comments.json` – Video comments and replies
-- `reactions.json` – Likes and dislikes for videos and comments
-- `playlists.json` – User-created video playlists
+- `users.json` – User account data.
+- `channels.json` – User channel data, including subscriber counts.
+- `videos.json` – Main collection with video metadata and embedded comments/stats.
+- `subscriptions.json` – Log of channel subscription events.
+- `reactions.json` – Log of like/dislike events for videos and comments.
+- `playlists.json` – User-created video playlists.

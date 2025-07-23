@@ -1,18 +1,16 @@
 [
-    {
-        "_id": { "$oid": "66512e3571e81550b650eb68" },
-        "name": "OpticLens SA",
-        "address": {
-            "street": "Lens Street",
-            "number": "123",
-            "floor": "3",
-            "door": "C",
-            "city": "Barcelona",
-            "postal_code": "08003",
-            "country": "Spain"
-        },
-        "phone": "9999-9999",
-        "fax": "8888-8888",
-        "nif": "A12345678"
-    }
-]
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4b" },
+    "name": "OptiSupplies Inc.",
+    "address": {
+      "street": "Visionary Avenue",
+      "number": "101",
+      "city": "Barcelona",
+      "postal_code": "08001",
+      "country": "Spain"
+    },
+    "phone": "931234567",
+    "fax": "937654321",
+    "nif": "B12345678"
+  }
+] 

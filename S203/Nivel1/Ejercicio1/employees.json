@@ -1,8 +1,10 @@
 [
-    {
-        "_id": { "$oid": "66512f3571e81550b650eb70" },
-        "name": "Carlos Ramos",
-        "email": "carlos@optic.com",
-        "phone": "7777-7777"
-    }
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4c" },
+    "name": "Carlos Ramos"
+  },
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4d" },
+    "name": "Ana Ruiz"
+  }
 ] 

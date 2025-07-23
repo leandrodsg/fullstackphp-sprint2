@@ -1,16 +1,24 @@
 [
-    {
-        "_id": { "$oid": "66512e7571e81550b650eb69" },
-        "brand": "Raybon",
-        "prescription": {
-            "left_eye": 2.3,
-            "right_eye": 2.0
-        },
-        "frame_type": "Metallic",
-        "frame_color": "Black",
-        "left_lens_color": "Green",
-        "right_lens_color": "Green",
-        "price": 127.0,
-        "supplier_id": { "$oid": "66512e3571e81550b650eb68" }
-    }
-]
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4e" },
+    "brand": "Raybon",
+    "prescription": { "left_eye": 2.3, "right_eye": 2.0 },
+    "frame_type": "Metallic",
+    "frame_color": "Black",
+    "left_lens_color": "Green",
+    "right_lens_color": "Green",
+    "price": 127.0,
+    "supplier_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4b" }
+  },
+  {
+    "_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4f" },
+    "brand": "Oacley",
+    "prescription": { "left_eye": 1.5, "right_eye": 1.25 },
+    "frame_type": "Pasta",
+    "frame_color": "Blue",
+    "left_lens_color": "Grey",
+    "right_lens_color": "Grey",
+    "price": 99.50,
+    "supplier_id": { "$oid": "665b1b3a7f8b9c0d1e2f3a4b" }
+  }
+] 
