@@ -1,133 +1,146 @@
--- Database and tables
-
+-- initialize spotify database
 create database if not exists spotify;
 use spotify;
 
--- Users table
-create table usuario (
+-- create users table with authentication and profile information
+create table users (
     id int auto_increment primary key,
     email varchar(100) not null unique,
-    senha varchar(100) not null,
-    nome varchar(100),
-    data_nascimento date,
-    sexo enum('m', 'f', 'outro'),
-    pais varchar(50),
-    codigo_postal varchar(15),
-    tipo enum('gratis', 'premium') not null
+    password varchar(255) not null,
+    username varchar(50) not null unique,
+    birth_date date not null,
+    gender char(1),
+    country varchar(50),
+    postal_code varchar(10),
+    account_type enum('free', 'premium') default 'free'
 );
 
--- Subscriptions table
-create table assinatura (
+-- create premium subscriptions table with payment tracking
+create table subscriptions (
     id int auto_increment primary key,
-    usuario_id int not null,
-    data_assinatura date,
-    tipo varchar(50),
-    valor decimal(10,2),
-    forma_pagamento enum('cartao', 'paypal'),
-    foreign key (usuario_id) references usuario(id)
+    user_id int not null,
+    started_at datetime not null,
+    renewed_at datetime not null,
+    payment_method enum('credit_card', 'paypal') not null,
+    amount decimal(10,2) not null,
+    status enum('active', 'cancelled') default 'active',
+    foreign key (user_id) references users(id)
 );
 
--- Credit cards table
-create table cartao (
+-- create credit cards table for subscription payments
+create table credit_cards (
     id int auto_increment primary key,
-    assinatura_id int not null,
-    numero_cartao varchar(20),
-    validade date,
-    codigo_seguranca varchar(4),
-    foreign key (assinatura_id) references assinatura(id)
+    user_id int not null,
+    card_number varchar(16) not null,
+    expiry_date date not null,
+    security_code varchar(3) not null,
+    foreign key (user_id) references users(id)
 );
 
--- PayPal payments table
-create table paypal (
+-- create paypal accounts table for subscription payments
+create table paypal_accounts (
     id int auto_increment primary key,
-    assinatura_id int not null,
-    usuario_paypal varchar(100),
-    foreign key (assinatura_id) references assinatura(id)
+    user_id int not null,
+    paypal_username varchar(100) not null,
+    foreign key (user_id) references users(id)
 );
 
--- Playlists table
-create table playlist (
+-- create payments history table for subscription tracking
+create table payments (
     id int auto_increment primary key,
-    usuario_id int,
-    titulo varchar(100),
-    numero_musicas int default 0,
-    data_criacao date,
-    ativa boolean default true,
-    compartilhada boolean default false,
-    foreign key (usuario_id) references usuario(id)
+    subscription_id int not null,
+    order_number varchar(50) not null unique,
+    amount decimal(10,2) not null,
+    paid_at datetime not null,
+    foreign key (subscription_id) references subscriptions(id)
 );
 
--- Artists table
-create table artista (
+-- create artists table with basic profile information
+create table artists (
     id int auto_increment primary key,
-    nome varchar(100) not null
+    name varchar(100) not null,
+    image_url varchar(255)
 );
 
--- Albums table
-create table album (
+-- create similar artists table for music recommendations
+create table similar_artists (
+    artist_id int not null,
+    similar_artist_id int not null,
+    primary key (artist_id, similar_artist_id),
+    foreign key (artist_id) references artists(id),
+    foreign key (similar_artist_id) references artists(id)
+);
+
+-- create albums table with release information and artist relationship
+create table albums (
     id int auto_increment primary key,
-    titulo varchar(100),
-    data_lancamento date,
-    imagem varchar(100),
-    artista_id int,
-    foreign key (artista_id) references artista(id)
+    artist_id int not null,
+    title varchar(100) not null,
+    release_date date not null,
+    cover_url varchar(255),
+    foreign key (artist_id) references artists(id)
 );
 
--- Songs table
-create table musica (
+-- create songs table with duration and play count tracking
+create table songs (
     id int auto_increment primary key,
-    titulo varchar(100),
-    duracao int,
-    album_id int,
-    foreign key (album_id) references album(id)
+    album_id int not null,
+    title varchar(100) not null,
+    duration_seconds int not null,
+    play_count int default 0,
+    foreign key (album_id) references albums(id)
 );
 
--- Songs in playlists
-create table playlist_musica (
-    playlist_id int,
-    musica_id int,
-    adicionado_por int,
-    data_adicao datetime,
-    foreign key (playlist_id) references playlist(id),
-    foreign key (musica_id) references musica(id),
-    foreign key (adicionado_por) references usuario(id)
+-- create playlists table with sharing and active status
+create table playlists (
+    id int auto_increment primary key,
+    user_id int not null,
+    title varchar(100) not null,
+    created_at datetime not null,
+    song_count int not null default 0,
+    is_shared boolean default false,
+    deleted_at datetime,
+    foreign key (user_id) references users(id)
 );
 
--- Artists followed by users
-create table usuario_artista (
-    usuario_id int,
-    artista_id int,
-    data_seguimento date,
-    primary key (usuario_id, artista_id),
-    foreign key (usuario_id) references usuario(id),
-    foreign key (artista_id) references artista(id)
+-- create playlist songs table tracking who adds each song
+create table playlist_songs (
+    playlist_id int not null,
+    song_id int not null,
+    added_by int not null,
+    added_at datetime not null,
+    primary key (playlist_id, song_id),
+    foreign key (playlist_id) references playlists(id),
+    foreign key (song_id) references songs(id),
+    foreign key (added_by) references users(id)
 );
 
--- Similar artists
-create table artista_similar (
-    artista_id int,
-    similar_id int,
-    primary key (artista_id, similar_id),
-    foreign key (artista_id) references artista(id),
-    foreign key (similar_id) references artista(id)
+-- create user artists table for following relationships
+create table user_artists (
+    user_id int not null,
+    artist_id int not null,
+    followed_at datetime not null,
+    primary key (user_id, artist_id),
+    foreign key (user_id) references users(id),
+    foreign key (artist_id) references artists(id)
 );
 
--- Favorite songs
-create table favorito_musica (
-    usuario_id int,
-    musica_id int,
-    data_favorito datetime,
-    primary key (usuario_id, musica_id),
-    foreign key (usuario_id) references usuario(id),
-    foreign key (musica_id) references musica(id)
+-- create favorite songs table for user music preferences
+create table favorite_songs (
+    user_id int not null,
+    song_id int not null,
+    added_at datetime not null,
+    primary key (user_id, song_id),
+    foreign key (user_id) references users(id),
+    foreign key (song_id) references songs(id)
 );
 
--- Favorite albums
-create table favorito_album (
-    usuario_id int,
-    album_id int,
-    data_favorito datetime,
-    primary key (usuario_id, album_id),
-    foreign key (usuario_id) references usuario(id),
-    foreign key (album_id) references album(id)
+-- create favorite albums table for user album preferences
+create table favorite_albums (
+    user_id int not null,
+    album_id int not null,
+    added_at datetime not null,
+    primary key (user_id, album_id),
+    foreign key (user_id) references users(id),
+    foreign key (album_id) references albums(id)
 );

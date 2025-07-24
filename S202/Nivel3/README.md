@@ -1,79 +1,59 @@
+# Spotify Clone - Music Streaming System
 
-# Exercise 1 - Simplified Spotify
+This project implements a relational database for a music streaming platform inspired by Spotify.
 
-This project models and implements the database of a streaming platform inspired by Spotify.
-The goal is to simulate essential features of a digital music system, exploring relational modeling and SQL queries.
+## How to Run
 
----
+1. Execute `bd_spotify.sql` to create the database structure
+2. Execute `dados_spotify.sql` to populate with sample data
+3. Execute queries from `consultas_spotify.sql` to test the system
 
-## Modeled Entities
+## Project Structure
 
-* usuario: email, password, name, date of birth, gender, country, postal code, type (free or premium)
-* assinatura: premium subscription data, value, payment method
-* cartao / paypal: specific details for payment methods
-* playlist: title, owner user, creation date, active and shared status
-* artista: artist name
-* album: belongs to an artist, title, release date, image
-* musica: belongs to an album, title, duration
-* playlist_musica: links songs and playlists, including who added and when
-* usuario_artista: many-to-many relationship of users following artists
-* artista_similar: artists related as similar
-* favorito_musica / favorito_album: users who marked songs and albums as favorites
+### Main Entities
 
----
+User (users)
+- Account and profile management (email, username, password)
+- Personal data (birth date, gender, country, postal code)
+- Account type tracking (free/premium)
+- Unique constraints on email and username
 
-## Relationships and Functional Requirements Covered
+Subscription (subscriptions)
+- Premium account management (payment method, amount)
+- Payment history tracking (order numbers, dates)
+- Active/cancelled status control
+- Credit card and PayPal support
 
-* **"Un usuari/ària pot ser gràtis o premium..."**
-  Each user is classified as 'free' or 'premium'. The `usuario` table has the `tipo` field.
+Artist (artists)
+- Basic profile information
+- Image URL storage
+- Similar artists relationships
+- Follower tracking capability
 
-* **"Els usuaris premium tenen una subscripció activa..."**
-  The `assinatura` table stores active subscription data. It can be linked to `cartao` or `paypal`.
+### Content Structure
 
-* **"Un usuari/ària pot crear llistes de reproducció..."**
-  Playlists are modeled with active/inactive status and sharing option.
+Albums (albums)
+- Direct artist attribution
+- Release date tracking
+- Cover image URL storage
+- Content organization
 
-* **"Una cançó pot ser afegida a uma llista per altres usuaris..."**
-  The `playlist_musica` table records who added each song and when.
+Songs (songs)
+- Duration tracking in seconds
+- Play count monitoring
+- Album relationship management
+- Unique song identification
 
-* **"Un álbum pertany a un artista..."**
-  The artist → album → song hierarchy is modeled using direct foreign keys.
+### User Interactions
 
-* **"Un usuari/ària pot seguir diversos artistes..."**
-  The many-to-many relationship is implemented in the `usuario_artista` table.
+Playlists (playlists)
+- Public/private sharing options
+- Creation and deletion date tracking (a null deletion date means the playlist is active)
+- Song count tracking
+- Playlist contributions tracking
 
-* **"Els artistes poden estar relacionats com a similars..."**
-  The `artista_similar` table models self-relationships between artists.
-
-* **"Els usuaris poden marcar àlbums i cançons com a preferits..."**
-  The `favorito_musica` and `favorito_album` tables register favorites with timestamps.
-
----
-
-## Project File Structure
-
-* `bd_spotify.sql`
-  Creates the database and all tables with appropriate primary/foreign keys and data types.
-
-* `dados_spotify.sql`
-  Inserts fictional data covering users, artists, playlists, songs, favorites, and relationships.
-
-* `consultas_spotify.sql`
-  SQL queries to validate the relational model and test features like favorites, follows, and playlists.
-
-* `der_spotify.png` *(optional)*
-  Entity-relationship diagram exported from MySQL Workbench.
-
----
-
-## How to Generate the ERD in MySQL Workbench
-
-1. Open MySQL Workbench
-2. Click `File > New Model`
-3. Go to `Database > Reverse Engineer`
-4. Select the `spotify` database connection
-5. Choose the tables and finish
-6. In the sidebar, open `EER Diagram`
-7. Organize the entities and export via `File > Export > PNG`
-
----
+User Relations
+- Artist following with timestamps (user_artists)
+- Song favorites with tracking (favorite_songs)
+- Album favorites with tracking (favorite_albums)
+- Playlist contributions with user attribution (playlist_songs)

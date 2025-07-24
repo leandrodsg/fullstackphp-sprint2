@@ -1,58 +1,87 @@
 use youtube;
 
--- 1. List all users
+-- Listar todos los usuarios registrados
 select * from user;
 
--- 2. Channels and their owners
-select c.id, c.name as channel, u.username as owner
+-- Mostrar canales con sus propietarios
+select c.name as channel_name, u.username as owner
 from channel c
 join user u on c.user_id = u.id;
 
--- 3. Videos and their channels
-select v.id, v.title, v.views, c.name as channel
+-- Obtener estadísticas de videos
+select 
+    v.title,
+    v.view_count as reproduccions,
+    v.like_count as likes,
+    v.dislike_count as dislikes,
+    concat(round(v.file_size / 1024 / 1024, 2), ' MB') as file_size,
+    v.duration as duration_seconds
 from video v
-join channel c on v.channel_id = c.id;
+order by v.view_count desc;
 
--- 4. Comments with author and video
-select cmt.text, u.username as author, v.title as video
-from comment cmt
-join user u on cmt.user_id = u.id
-join video v on cmt.video_id = v.id;
+-- Mostrar comentarios con autores y videos
+select 
+    c.text, 
+    u.username as author, 
+    v.title as video,
+    count(cl.user_id) as comment_likes
+from comment c
+join user u on c.user_id = u.id
+join video v on c.video_id = v.id
+left join comment_like cl on c.id = cl.comment_id
+group by c.id;
 
--- 5. Subscriptions
-select u.username as subscriber, c.name as channel
+-- Listar suscripciones activas
+select 
+    u.username as subscriber, 
+    c.name as channel,
+    s.subscribed_at
 from subscription s
 join user u on s.user_id = u.id
 join channel c on s.channel_id = c.id;
 
--- 6. Tags linked to videos
-select v.title, t.name as tag
-from video_tag vt
-join video v on vt.video_id = v.id
-join tag t on vt.tag_id = t.id;
-
--- 7. Playlists and videos
-select p.name as playlist, v.title as video
-from playlist_video pv
-join playlist p on pv.playlist_id = p.id
-join video v on pv.video_id = v.id;
-
--- 8. Video likes and dislikes
-select v.title,
-    sum(case when vl.type = 'like' then 1 else 0 end) as likes,
-    sum(case when vl.type = 'dislike' then 1 else 0 end) as dislikes
+-- Mostrar videos con sus etiquetas
+select 
+    v.title,
+    group_concat(t.name) as tags
 from video v
-left join video_like vl on v.id = vl.video_id
+join video_tag vt on v.id = vt.video_id
+join tag t on vt.tag_id = t.id
 group by v.id;
 
--- 9. Comment likes
-select u.username, c.text as comment
-from comment_like cl
-join user u on cl.user_id = u.id
-join comment c on cl.comment_id = c.id;
+-- Listar contenido de listas de reproducción
+select 
+    p.name as playlist,
+    u.username as creator,
+    v.title as video,
+    pv.added_at
+from playlist_video pv
+join playlist p on pv.playlist_id = p.id
+join video v on pv.video_id = v.id
+join user u on p.user_id = u.id
+order by p.name, pv.added_at;
 
--- 10. Total videos per channel
-select c.name as channel, count(v.id) as total_videos
-from channel c
-left join video v on v.channel_id = c.id
-group by c.id;
+-- Videos más populares por reproduccions
+select 
+    v.title,
+    c.name as channel,
+    v.view_count as reproduccions,
+    v.like_count as likes,
+    v.dislike_count as dislikes,
+    concat(round(v.file_size / 1024 / 1024, 2), ' MB') as tamaño_archivo
+from video v
+join channel c on v.channel_id = c.id
+order by v.view_count desc;
+
+-- Videos con mejor ratio likes/dislikes
+select 
+    v.title,
+    v.like_count,
+    v.dislike_count,
+    case 
+        when v.dislike_count = 0 then v.like_count
+        else round(v.like_count / v.dislike_count, 2)
+    end as ratio_likes_dislikes
+from video v
+where v.like_count > 0 or v.dislike_count > 0
+order by ratio_likes_dislikes desc;
