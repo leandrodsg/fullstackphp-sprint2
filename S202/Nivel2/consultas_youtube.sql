@@ -11,12 +11,16 @@ join user u on c.user_id = u.id;
 -- Obtener estadísticas de videos
 select 
     v.title,
+    c.name as channel,
+    u.username as owner,
     v.view_count as reproduccions,
     v.like_count as likes,
     v.dislike_count as dislikes,
     concat(round(v.file_size / 1024 / 1024, 2), ' MB') as file_size,
     v.duration as duration_seconds
 from video v
+join channel c on v.channel_id = c.id
+join user u on c.user_id = u.id
 order by v.view_count desc;
 
 -- Mostrar comentarios con autores y videos
@@ -43,8 +47,12 @@ join channel c on s.channel_id = c.id;
 -- Mostrar videos con sus etiquetas
 select 
     v.title,
+    c.name as channel,
+    u.username as owner,
     group_concat(t.name) as tags
 from video v
+join channel c on v.channel_id = c.id
+join user u on c.user_id = u.id
 join video_tag vt on v.id = vt.video_id
 join tag t on vt.tag_id = t.id
 group by v.id;
@@ -65,17 +73,21 @@ order by p.name, pv.added_at;
 select 
     v.title,
     c.name as channel,
+    u.username as owner,
     v.view_count as reproduccions,
     v.like_count as likes,
     v.dislike_count as dislikes,
-    concat(round(v.file_size / 1024 / 1024, 2), ' MB') as tamaño_archivo
+    concat(round(v.file_size / 1024 / 1024, 2), ' MB') as file_size
 from video v
 join channel c on v.channel_id = c.id
+join user u on c.user_id = u.id
 order by v.view_count desc;
 
 -- Videos con mejor ratio likes/dislikes
 select 
     v.title,
+    c.name as channel,
+    u.username as owner,
     v.like_count,
     v.dislike_count,
     case 
@@ -83,5 +95,7 @@ select
         else round(v.like_count / v.dislike_count, 2)
     end as ratio_likes_dislikes
 from video v
+join channel c on v.channel_id = c.id
+join user u on c.user_id = u.id
 where v.like_count > 0 or v.dislike_count > 0
 order by ratio_likes_dislikes desc;
