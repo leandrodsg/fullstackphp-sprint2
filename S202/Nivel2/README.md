@@ -14,7 +14,7 @@ User (user)
 Channel (channel)
 - Unique name
 - Description and creation date
-- Linked to an owner user
+- Linked to an owner user (each user can have only one channel)
 
 Video (video)
 - Unique identifier with title and description
@@ -73,7 +73,7 @@ Subscriptions (subscription)
 3. Counters: Number of reproductions, likes and dislikes as direct attributes
 4. Video states: Public, private, unlisted
 5. Tags: Unique identifier, name, marking user, date/time
-6. Channel: Unique identifier, name, description, creation date
+6. Unique identifier, name, description, creation date (each user can have only one channel)
 7. Subscriptions: User can subscribe to channels with date/time
 8. Playlists: Unique identifier, name, public/private, creation date
 9. Comments: Unique identifier, text, date/time

@@ -21,7 +21,7 @@ create table channel (
     name varchar(100) not null unique,
     description text,
     creation_date date not null,
-    user_id int,
+    user_id int unique,
     foreign key (user_id) references user(id)
         on delete cascade
         on update cascade
