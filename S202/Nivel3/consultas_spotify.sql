@@ -5,11 +5,15 @@ select username, account_type, country
 from users;
 
 -- show premium users with their subscription and payment details
-select u.username, s.payment_method, s.amount, s.renewed_at, p.order_number, p.paid_at
+select u.username, s.payment_method as subscription_method, p.payment_method as payment_method, s.amount, s.renewed_at, p.order_number, p.paid_at
 from users u
 join subscriptions s on u.id = s.user_id
 join payments p on s.id = p.subscription_id
 where u.account_type = 'premium';
+
+-- all payments with order number, amount, payment date, and payment method
+select p.order_number, p.amount, p.paid_at, p.payment_method
+from payments p;
 
 -- show credit card users
 select u.username, 'Credit Card' as payment_type, cc.card_number

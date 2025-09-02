@@ -52,6 +52,7 @@ create table payments (
     order_number varchar(50) not null unique,
     amount decimal(10,2) not null,
     paid_at datetime not null,
+    payment_method enum('credit_card', 'paypal') not null,
     foreign key (subscription_id) references subscriptions(id)
 );
 
