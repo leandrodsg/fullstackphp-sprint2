@@ -69,11 +69,11 @@ Subscriptions (subscription)
 ### Requirements Implemented:
 
 1. User: Unique email, password, username, personal data
-2. Video: Title, description, grandària (file_size), file name, duration, thumbnail
+2. Video: Title, description, file_size, file name, duration, thumbnail
 3. Counters: Number of reproductions, likes and dislikes as direct attributes
 4. Video states: Public, private, unlisted
 5. Tags: Unique identifier, name, marking user, date/time
-6. Unique identifier, name, description, creation date (each user can have only one channel)
+6. Channel: Unique identifier, name, description, creation date (each user can have only one channel)
 7. Subscriptions: User can subscribe to channels with date/time
 8. Playlists: Unique identifier, name, public/private, creation date
 9. Comments: Unique identifier, text, date/time

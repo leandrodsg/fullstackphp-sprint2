@@ -11,7 +11,8 @@ values
 insert into channel (name, description, creation_date, user_id)
 values 
 ('ana channel', 'tips and tutorials', '2025-06-01', 1),
-('joao tech', 'technology and reviews', '2025-06-02', 2);
+('joao tech', 'technology and reviews', '2025-06-02', 2),
+('maria channel', 'general content', '2025-06-03', 3);
 
 -- Insertar videos de ejemplo
 insert into video (title, description, file_name, file_size, duration, thumbnail, view_count, like_count, dislike_count, status, channel_id, publish_date)
