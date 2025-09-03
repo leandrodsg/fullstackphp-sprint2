@@ -13,8 +13,7 @@ The database, named `optics`, is composed of the following tables that fulfill a
 - `suppliers`: Stores supplier information (name, address, phone, fax, NIF)
 - `brands`: Centralizes glasses brands with their supplier relationships
 - `glasses`: Contains glasses specifications (model, prescription powers, frame details, price)
-- `clients`: Holds client data including registration date and contact information
-- `referrals`: Manages client recommendations (ensuring one recommender per client)
+- `clients`: Holds client data including registration date, contact information, and who recommended the client (if any, via the field referred_by)
 - `employees`: Tracks sales staff
 - `sales`: Records transaction headers (date, client, employee)
 - `sale_items`: Enables multiple items per sale with historical pricing
@@ -27,8 +26,8 @@ The database, named `optics`, is composed of the following tables that fulfill a
    - Ensures each brand works with exactly one supplier
 
 2. Client Referral System:
-   - `PRIMARY KEY` on `referrals.client_id`
-   - Self-referential relationship in `referrals`
+   - The field `referred_by` in `clients` stores the client who recommended them (if any)
+   - Foreign key from `clients.referred_by` to `clients.client_id`
    - Guarantees maximum one recommender per client
 
 3. Sales Management:

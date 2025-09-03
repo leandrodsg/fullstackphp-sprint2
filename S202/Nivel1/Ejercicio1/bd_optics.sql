@@ -38,7 +38,6 @@ create table glasses (
     foreign key (brand_id) references brands(brand_id) on delete restrict on update cascade
 );
 
--- Tabla clients.
 create table clients (
     client_id int auto_increment primary key,
     name varchar(100) not null,
@@ -47,14 +46,8 @@ create table clients (
     zip_code varchar(20),
     phone varchar(20),
     email varchar(100) unique,
-    registration_date date not null
-);
-
--- Tabla referrals.
-create table referrals (
-    client_id int primary key,
+    registration_date date not null,
     referred_by int null,
-    foreign key (client_id) references clients(client_id) on delete cascade on update cascade,
     foreign key (referred_by) references clients(client_id) on delete set null on update cascade
 );
 

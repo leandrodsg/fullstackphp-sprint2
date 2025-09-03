@@ -24,14 +24,10 @@ values
 ('V-101', 4, -3.00, -3.25, 'floating', 'Silver', 'Clear', 210.00);
 
 -- Inserta datos en clients.
-insert into clients (name, street, city, zip_code, phone, email, registration_date)
+insert into clients (name, street, city, zip_code, phone, email, registration_date, referred_by)
 values 
-('Ana Costa', 'Rua das Flores, 10', 'Lisboa', '1200-199', '+351 912345678', 'ana.costa@email.com', '2024-01-15'),
-('Bruno Alves', 'Avenida Principal, 50', 'Porto', '4000-010', '+351 923456789', 'bruno.alves@email.com', '2024-02-20');
-
--- Inserta datos en referrals.
-insert into referrals (client_id, referred_by)
-values (2, 1);
+('Ana Costa', 'Rua das Flores, 10', 'Lisboa', '1200-199', '+351 912345678', 'ana.costa@email.com', '2024-01-15', NULL),
+('Bruno Alves', 'Avenida Principal, 50', 'Porto', '4000-010', '+351 923456789', 'bruno.alves@email.com', '2024-02-20', 1);
 
 -- Inserta datos en employees.
 insert into employees (name)

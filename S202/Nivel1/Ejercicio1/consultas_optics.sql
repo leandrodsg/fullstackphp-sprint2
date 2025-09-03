@@ -38,8 +38,11 @@ join brands as b on g.brand_id = b.brand_id
 join suppliers as sup on b.supplier_id = sup.supplier_id
 order by sup.name;
 
--- Cliente con una recomendacion.
-select * from referrals where client_id = 2;
+-- Cliente con una recomendacion
+select c.*, r.name as recommended_by
+from clients c
+left join clients r on c.referred_by = r.client_id
+where c.client_id = 2 and c.referred_by is not null;
 
 -- Marca con un proveedor.
 select b.name as brand, s.name as supplier
