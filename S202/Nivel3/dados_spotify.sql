@@ -17,9 +17,9 @@ insert into paypal_accounts (user_id, paypal_username) values
 (1, 'johndoe_paypal');
 
 -- insert subscription payment history
-insert into payments (subscription_id, order_number, amount, paid_at) values
-(1, 'ORD001', 9.99, '2025-01-01 00:00:00'),
-(1, 'ORD002', 9.99, '2025-02-01 00:00:00');
+insert into payments (subscription_id, order_number, amount, paid_at, payment_method) values
+(1, 'ORD001', 9.99, '2025-01-01 00:00:00', 'credit_card'),
+(1, 'ORD002', 9.99, '2025-02-01 00:00:00', 'credit_card');
 
 -- insert artists with their profile images
 insert into artists (name, image_url) values
